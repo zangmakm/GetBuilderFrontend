@@ -1,0 +1,9 @@
+@import "../theme.scss";
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $nav-bg;
+  height: 10vh;
+}
