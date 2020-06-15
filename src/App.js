@@ -1,4 +1,4 @@
-import Routes from "./routes/Routes";
+import Routes from "./routes/routes";
 import TopNav from "./navigation/TopNav";
 import "bootstrap/dist/css/bootstrap.min.css";
 
