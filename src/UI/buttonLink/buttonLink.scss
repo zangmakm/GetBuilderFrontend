@@ -1,0 +1,11 @@
+.btn-right {
+  border: 1px solid #61b0bc;
+  padding: 2px 9px;
+  float: right;
+  color: #61b0bc;
+  cursor: pointer;
+  &:hover {
+    background-color: #61b0bc;
+    color: white;
+  }
+}

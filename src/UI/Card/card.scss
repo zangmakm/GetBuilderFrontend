@@ -1,0 +1,26 @@
+.myCard {
+  margin: 10px;
+  border: none;
+  max-width: 30%;
+  .mycard-header {
+    img {
+      max-width: 200px;
+    }
+  }
+
+  .card-box {
+    padding: 10px 5px;
+    .card-title {
+      text-align: left;
+      color: #61b0bc;
+      &:after {
+        content: "";
+        display: block;
+        width: 70px;
+        height: 3px;
+        margin: 1.5rem 0;
+        background-color: #61b0bc;
+      }
+    }
+  }
+}
