@@ -1,7 +1,9 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import "./topNav.scss";
+import { isLoggedIn } from "../utils/auth";
+import { getBuilderId, getClientId } from "../utils/auth";
 
 const NavContainer = styled.ul`
   display: flex;
@@ -25,7 +27,21 @@ const activeStyle = {
   textDecoration: "underline",
 };
 
+const StyledSignin = styled(NavLink)`
+  display: ${(props) => (props.isloggedin ? "none" : "")};
+`;
+
+const StyledDashboard = styled(NavLink)`
+  display: ${(props) => (props.isloggedin ? "" : "none")};
+`;
+
+// const isLoggedIn = () => {
+//   return false;
+// };
+
 const TopNav = () => {
+  const loginClient = getClientId();
+  const loginBuilder = getBuilderId();
   return (
     <nav className="nav">
       <NavContainer>
@@ -40,9 +56,28 @@ const TopNav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard" activeStyle={activeStyle}>
+          <StyledDashboard
+            isloggedin={isLoggedIn() ? 1 : 0}
+            loginclient={loginClient}
+            loginbuilder={loginBuilder}
+            to={
+              loginClient
+                ? `clients/${loginClient}`
+                : `builders/${loginBuilder}`
+            }
+            activeStyle={activeStyle}
+          >
             DashBoard
-          </NavLink>
+          </StyledDashboard>
+        </li>
+        <li>
+          <StyledSignin
+            to="/signin"
+            isloggedin={isLoggedIn() ? 1 : 0}
+            activeStyle={activeStyle}
+          >
+            SignIn
+          </StyledSignin>
         </li>
       </NavContainer>
     </nav>
