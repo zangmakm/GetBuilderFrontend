@@ -9,3 +9,7 @@ export const fetchBuilders = () => {
     builders: res.data.data.map((builder) => ({ ...builder, image: mockImg })),
   }));
 };
+
+export const createBuilder = (builder) => {
+  return post(API_BUILDER_URL, builder).then((res) => res.data.data);
+};
