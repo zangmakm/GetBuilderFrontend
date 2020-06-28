@@ -1,7 +1,7 @@
 import React from "react";
 import "./card.scss";
 
-const Card = (props) => {
+const MyCard = (props) => {
   return (
     <div className="myCard">
       <div className="mycard-header">
@@ -15,4 +15,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default MyCard;

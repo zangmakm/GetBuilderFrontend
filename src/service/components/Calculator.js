@@ -50,7 +50,7 @@ class Calculator extends Component {
           </span>
           <span>It's free to try - give it a go!</span>
         </Ad>
-        <CalButton href="#">Find a Builder</CalButton>
+        <CalButton onClick={this.props.handleSubmit}>Find a Builder</CalButton>
       </CalContainer>
     );
   }

@@ -1,42 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import builderPng from "../assets/customer.png";
 import pricePng from "../assets/price.png";
 import supportPng from "../assets/technical-support.png";
-import serviceImg1 from "../assets/services/001-underfloor heating.png";
-import serviceImg2 from "../assets/services/002-paint.png";
-import serviceImg3 from "../assets/services/003-paint roller.png";
-import serviceImg4 from "../assets/services/004-wallpaper.png";
-import serviceImg5 from "../assets/services/005-toolbox.png";
-import serviceImg6 from "../assets/services/006-toolbox.png";
-import Card from "../../UI/Card/Card";
-import OverlayImg from "../../UI/OverlayCard/OverlayImg";
+import MyCard from "../../UI/Card/MyCard";
 import { fetchBuilders } from "../../api/builders";
-
-const FlexContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-item: center;
-`;
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-template-rows: minmax(100px, auto);
-  margin: 40px;
-  grid-auto-flow: dense;
-  grid-gap: 20px;
-`;
-
-const services = [
-  { img: serviceImg1, content: "underfloor heating" },
-  { img: serviceImg2, content: "paint" },
-  { img: serviceImg3, content: "paint roller" },
-  { img: serviceImg4, content: "wallpaper" },
-  { img: serviceImg5, content: "toolbox" },
-  { img: serviceImg6, content: "toolbox" },
-];
+import Builders from "../../builders/Builders";
+import FlexContainer from "../../UI/FlexContainer";
+import ServiceList from "../../service/ServiceList";
 
 class HomeBody extends React.Component {
   state = {
@@ -60,6 +30,7 @@ class HomeBody extends React.Component {
       });
     });
   };
+
   render() {
     return (
       <section>
@@ -84,45 +55,26 @@ class HomeBody extends React.Component {
           <div style={{ marginTop: "5%" }}>
             <h3 style={{ textAlign: "center" }}>Why Choose Us</h3>
             <FlexContainer>
-              <Card
+              <MyCard
                 title="Professional and trusted builders"
                 imgSrc={builderPng}
-              ></Card>
-              <Card
+                content="Broomer has the largest amount and the most professional cleaners in Australia. Best service and experiences guaranteed."
+              ></MyCard>
+              <MyCard
                 title="Best platform and fair price"
                 imgSrc={pricePng}
-              ></Card>
-              <Card
+                content="You can use our mobile app or website to book cleaners and also track the process of your orders. Best price guaranteed."
+              ></MyCard>
+              <MyCard
                 title="Reliable customer support"
                 imgSrc={supportPng}
-              ></Card>
+                content="Our customer service team is ready to help you with any inquiries you have during office hours, Monday-Friday."
+              ></MyCard>
             </FlexContainer>
           </div>
-          <div style={{ marginTop: "5%" }}>
-            <h3 style={{ textAlign: "center" }}>All We Provide</h3>
-            <GridContainer>
-              {services.map((service) => (
-                <OverlayImg
-                  overlayImg={service.img}
-                  overlayContent={service.content}
-                />
-              ))}
-            </GridContainer>
-          </div>
+          <ServiceList />
 
-          <div style={{ marginTop: "5%" }}>
-            <h3 style={{ textAlign: "center" }}>Meet Our Builders</h3>
-            <FlexContainer>
-              {this.state.builders.map((builder) => (
-                <Card
-                  key={builder.id}
-                  imgSrc={builder.image}
-                  title={builder.builderName}
-                  content={builder.email}
-                />
-              ))}
-            </FlexContainer>
-          </div>
+          <Builders builders={this.state.builders} />
         </div>
       </section>
     );
