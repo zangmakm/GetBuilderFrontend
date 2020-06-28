@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Calculator from "./components/Calculator";
 import styled from "styled-components";
 import { createOrder } from "../api/order";
+import { getClientId } from "../utils/auth";
+import TopNav from "../navigation/TopNav";
 
 const Content = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
@@ -20,7 +22,6 @@ class ServiceView extends Component {
     garages: "",
     address: "",
     dueDate: "",
-    description: "",
     error: null,
     isCreating: false,
   };
@@ -34,7 +35,9 @@ class ServiceView extends Component {
   handleCreate = () => {
     const order = { ...this.state };
     this.setState({ isCreating: true }, () => {
-      createOrder(order)
+      const clientId = getClientId();
+      console.log(clientId);
+      createOrder(clientId, order)
         .then((newOrder) => {
           console.log(newOrder);
         })
@@ -43,29 +46,12 @@ class ServiceView extends Component {
   };
 
   render() {
-    const {
-      storeys,
-      bedrooms,
-      bathrooms,
-      garages,
-      address,
-      dueDate,
-      description,
-    } = this.state;
     return (
       <React.Fragment>
+        <TopNav />
         <Header />
         <Content>
-          <Detail
-            handleChange={this.handleChange}
-            storeys={storeys}
-            bedrooms={bedrooms}
-            bathrooms={bathrooms}
-            garages={garages}
-            address={address}
-            dueDate={dueDate}
-            description={description}
-          />
+          <Detail handleChange={this.handleChange} />
           <Calculator handleSubmit={this.handleCreate} />
         </Content>
       </React.Fragment>
