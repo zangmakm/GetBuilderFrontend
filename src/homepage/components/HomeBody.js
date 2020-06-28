@@ -4,7 +4,7 @@ import pricePng from "../assets/price.png";
 import supportPng from "../assets/technical-support.png";
 import MyCard from "../../UI/Card/MyCard";
 import { fetchBuilders } from "../../api/builders";
-import Builders from "../../builders/Builders";
+import Builders from "../../builder/Builders";
 import FlexContainer from "../../UI/FlexContainer";
 import ServiceList from "../../service/ServiceList";
 
