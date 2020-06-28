@@ -6,4 +6,7 @@
   align-items: center;
   background-color: $nav-bg;
   height: 10vh;
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
 }

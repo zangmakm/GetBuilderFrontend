@@ -14,7 +14,6 @@ section {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  padding: 100px;
   .homeHeader-text {
     position: relative;
     top: 20vh;
@@ -24,6 +23,7 @@ section {
     font-family: "Poppins", sans-serif;
     padding: 10px 20px;
     text-align: center;
+    margin: 100px;
   }
   h2 {
     position: relative;
@@ -41,5 +41,9 @@ section {
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+  }
+
+  .content {
+    padding: 50px;
   }
 }
