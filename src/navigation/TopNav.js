@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import "./topNav.scss";
 import { isLoggedIn } from "../utils/auth";
@@ -52,7 +52,7 @@ const TopNav = () => {
         </li>
         <li>
           <NavLink to="/service" activeStyle={activeStyle}>
-            Service
+            Order
           </NavLink>
         </li>
         <li>

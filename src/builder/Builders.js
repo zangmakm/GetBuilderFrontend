@@ -19,7 +19,7 @@ class Builders extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: "5%" }}>
+      <div style={{ marginTop: "10%" }}>
         <h3 style={{ textAlign: "center" }}>Meet Our Builders</h3>
         <FlexContainer>
           {this.props.builders.map((builder) => (

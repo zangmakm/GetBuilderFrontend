@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "../style/detail.scss";
 import { ListGroup, Form } from "react-bootstrap";
 import styled from "styled-components";
+import TextField from "@material-ui/core/TextField";
 import {
-  FaMapMarkerAlt,
+  FaHome,
   FaBed,
   FaBath,
   FaCalendarAlt,
-  FaColumns,
+  FaMapMarkerAlt,
+  FaCarAlt,
 } from "react-icons/fa";
 import OptionList from "./OptionList";
 
@@ -22,51 +24,64 @@ class Detail extends Component {
         <Form>
           <h3>See how little it could cost...</h3>
           <Form.Group>
-            <FaBed />
+            <FaHome />
             <Form.Label className="detail-label">
-              How many bedrooms do you have?
+              How many storeys do you want to build?
             </Form.Label>
             <br />
             <ListGroup horizontal>
               {["1", "2", "3", "4", "5+"].map((option) => (
-                <OptionList option={option}></OptionList>
+                <OptionList name="storeys" option={option}></OptionList>
+              ))}
+            </ListGroup>
+          </Form.Group>
+          <Form.Group>
+            <FaBed />
+            <Form.Label className="detail-label">
+              And how many bedrooms do you want?
+            </Form.Label>
+            <br />
+            <ListGroup horizontal>
+              {["1", "2", "3+"].map((option) => (
+                <OptionList name="bedrooms" option={option}></OptionList>
               ))}
             </ListGroup>
           </Form.Group>
           <Form.Group>
             <FaBath />
             <Form.Label className="detail-label">
-              And how many bedrooms do you have?
+              And how many bathrooms do you want?
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2", "3+"].map((option) => (
-                <OptionList option={option}></OptionList>
+              {["1", "2"].map((option) => (
+                <OptionList name="bathrooms" option={option}></OptionList>
               ))}
             </ListGroup>
           </Form.Group>
           <Form.Group>
-            <FaColumns />
+            <FaCarAlt />
             <Form.Label className="detail-label">
-              Do you need any of these cleaned?
+              And how many garages do you want?
             </Form.Label>
             <br />
-            <Form.Check inline label="Oven" type="checkbox"></Form.Check>
-            <Form.Check inline label="Carbinets" type="checkbox"></Form.Check>
-            <Form.Check inline label="Windows" type="checkbox"></Form.Check>
-            <Form.Check
-              inline
-              label="Carpet Steam"
-              type="checkbox"
-            ></Form.Check>
+            <ListGroup horizontal>
+              {["1", "2"].map((option) => (
+                <OptionList name="garages" option={option}></OptionList>
+              ))}
+            </ListGroup>
           </Form.Group>
           <Form.Group>
             <FaMapMarkerAlt />
             <Form.Label className="detail-label">
-              Where do you need the cleaning?
+              Where do you want to build your house?
             </Form.Label>
             <br />
-            <Form.Control placeholder="Enter a suburb" custom></Form.Control>
+            <Form.Control
+              name="address"
+              placeholder="Enter a suburb"
+              custom
+            ></Form.Control>
           </Form.Group>
           <Form.Group>
             <FaCalendarAlt />
@@ -74,13 +89,16 @@ class Detail extends Component {
               When do you need it done?
             </Form.Label>
             <br />
-            <Form.Check inline label="Today" type="radio"></Form.Check>
-            <Form.Check
-              inline
-              label="By a sertain day"
-              type="radio"
-            ></Form.Check>
-            <Form.Check inline label="Within 1 week" type="radio"></Form.Check>
+            <TextField
+              id="date"
+              label="DueDate"
+              type="date"
+              defaultValue={new Date().toLocaleString}
+              // className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
           </Form.Group>
         </Form>
       </DetailContainer>

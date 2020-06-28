@@ -7,6 +7,8 @@ import { fetchBuilders } from "../../api/builders";
 import Builders from "../../builder/Builders";
 import FlexContainer from "../../UI/FlexContainer";
 import ServiceList from "../../service/ServiceList";
+import ContactForm from "./ContactForm";
+import Footer from "./Footer";
 
 class HomeBody extends React.Component {
   state = {
@@ -33,26 +35,28 @@ class HomeBody extends React.Component {
 
   render() {
     return (
-      <section>
+      <div>
         <div className="content">
-          <h2>Builder Website</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            consectetur vitae diam sollicitudin mattis. Nam sagittis dui non
-            lectus feugiat accumsan. Phasellus sit amet magna ut diam pharetra
-            euismod ac et enim. Proin leo elit, condimentum non bibendum in,
-            feugiat sed ante. Fusce mattis scelerisque orci ut maximus. Maecenas
-            ut auctor metus, nec eleifend lacus. Praesent lobortis, nulla ut
-            mollis luctus, est quam convallis diam, at bibendum dolor risus quis
-            velit. Duis orci justo, dictum in fringilla non, ultricies id quam.
-            Quisque iaculis est lacus, in pretium urna convallis ac. Fusce eget
-            feugiat justo, feugiat maximus nisl. Class aptent taciti sociosqu ad
-            litora torquent per conubia nostra, per inceptos himenaeos. Proin
-            suscipit rutrum lacus, ut sagittis augue pulvinar ut. Nullam
-            laoreet, quam at tempor pulvinar, felis enim finibus dui, non
-            ultrices felis leo a ex.
-          </p>
-          <div style={{ marginTop: "5%" }}>
+          <div style={{ margin: "50px auto", width: "80%" }}>
+            <h2>Builder Website</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+              consectetur vitae diam sollicitudin mattis. Nam sagittis dui non
+              lectus feugiat accumsan. Phasellus sit amet magna ut diam pharetra
+              euismod ac et enim. Proin leo elit, condimentum non bibendum in,
+              feugiat sed ante. Fusce mattis scelerisque orci ut maximus.
+              Maecenas ut auctor metus, nec eleifend lacus. Praesent lobortis,
+              nulla ut mollis luctus, est quam convallis diam, at bibendum dolor
+              risus quis velit. Duis orci justo, dictum in fringilla non,
+              ultricies id quam. Quisque iaculis est lacus, in pretium urna
+              convallis ac. Fusce eget feugiat justo, feugiat maximus nisl.
+              Class aptent taciti sociosqu ad litora torquent per conubia
+              nostra, per inceptos himenaeos. Proin suscipit rutrum lacus, ut
+              sagittis augue pulvinar ut. Nullam laoreet, quam at tempor
+              pulvinar, felis enim finibus dui, non ultrices felis leo a ex.
+            </p>
+          </div>
+          <div style={{ marginTop: "10%" }}>
             <h3 style={{ textAlign: "center" }}>Why Choose Us</h3>
             <FlexContainer>
               <MyCard
@@ -75,8 +79,10 @@ class HomeBody extends React.Component {
           <ServiceList />
 
           <Builders builders={this.state.builders} />
+          <ContactForm />
         </div>
-      </section>
+        <Footer />
+      </div>
     );
   }
 }
