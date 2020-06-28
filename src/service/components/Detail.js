@@ -31,7 +31,11 @@ class Detail extends Component {
             <br />
             <ListGroup horizontal>
               {["1", "2", "3", "4", "5+"].map((option) => (
-                <OptionList name="storeys" option={option}></OptionList>
+                <OptionList
+                  name="storeys"
+                  option={option}
+                  on={this.props.handleChange}
+                ></OptionList>
               ))}
             </ListGroup>
           </Form.Group>
@@ -43,7 +47,11 @@ class Detail extends Component {
             <br />
             <ListGroup horizontal>
               {["1", "2", "3+"].map((option) => (
-                <OptionList name="bedrooms" option={option}></OptionList>
+                <OptionList
+                  name="bedrooms"
+                  option={option}
+                  onChange={this.props.handleChange}
+                ></OptionList>
               ))}
             </ListGroup>
           </Form.Group>
@@ -55,7 +63,11 @@ class Detail extends Component {
             <br />
             <ListGroup horizontal>
               {["1", "2"].map((option) => (
-                <OptionList name="bathrooms" option={option}></OptionList>
+                <OptionList
+                  name="bathrooms"
+                  option={option}
+                  onChange={this.props.handleChange}
+                ></OptionList>
               ))}
             </ListGroup>
           </Form.Group>
@@ -67,7 +79,11 @@ class Detail extends Component {
             <br />
             <ListGroup horizontal>
               {["1", "2"].map((option) => (
-                <OptionList name="garages" option={option}></OptionList>
+                <OptionList
+                  name="garages"
+                  option={option}
+                  onChange={this.props.handleChange}
+                ></OptionList>
               ))}
             </ListGroup>
           </Form.Group>
@@ -81,6 +97,7 @@ class Detail extends Component {
               name="address"
               placeholder="Enter a suburb"
               custom
+              onChange={this.props.handleChange}
             ></Form.Control>
           </Form.Group>
           <Form.Group>
@@ -94,10 +111,11 @@ class Detail extends Component {
               label="DueDate"
               type="date"
               defaultValue={new Date().toLocaleString}
-              // className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={this.props.handleChange}
+              name="dueDate"
             />
           </Form.Group>
         </Form>

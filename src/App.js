@@ -1,5 +1,4 @@
 import Routes from "./routes/routes";
-import TopNav from "./navigation/TopNav";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
@@ -8,7 +7,6 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <TopNav />
       <Routes />
     </div>
   );

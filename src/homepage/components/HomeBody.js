@@ -9,6 +9,7 @@ import FlexContainer from "../../UI/FlexContainer";
 import ServiceList from "../../service/ServiceList";
 import ContactForm from "./ContactForm";
 import Footer from "./Footer";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class HomeBody extends React.Component {
   state = {
@@ -77,8 +78,13 @@ class HomeBody extends React.Component {
             </FlexContainer>
           </div>
           <ServiceList />
-
-          <Builders builders={this.state.builders} />
+          <Builders
+            builders={this.state.builders}
+            loading={this.state.isLoading}
+          />
+          {this.state.isLoading && (
+            <CircularProgress style={{ marginLeft: "50%" }} />
+          )}
           <ContactForm />
         </div>
         <Footer />
