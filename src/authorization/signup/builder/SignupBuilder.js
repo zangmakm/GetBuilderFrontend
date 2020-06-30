@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Alert from "@material-ui/lab/Alert";
@@ -17,6 +17,7 @@ import Container from "@material-ui/core/Container";
 import { BUILDER_BASE_URL } from "../../../routes/URLMap";
 import { signup as signupFn } from "../../../api/auth";
 import { createBuilder } from "../../../api/builders";
+import TopNav from "../../../navigation/TopNav";
 import {
   setToken,
   setBuilderId,
@@ -39,7 +40,7 @@ function Copyright() {
 
 const useStyles = (theme) => ({
   container: {
-    paddingTop: "0",
+    paddingTop: "10vh",
     height: "100vh",
   },
   paper: {
@@ -123,197 +124,203 @@ class SignupBuilder extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Container component="main" maxWidth="xs" className={classes.container}>
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            BUILDER SIGN UP
-          </Typography>
-          <ValidatorForm
-            className={classes.form}
-            instantValidate={false}
-            onSubmit={this.handleSubmit}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="User Name"
-                  value={this.state.username}
-                  onChange={(event) =>
-                    this.setState({
-                      username: event.target.value,
-                    })
-                  }
-                  validators={["required", "minStringLength: 2"]}
-                  errorMessages={[
-                    "this field is required",
-                    "username must be at least two characters",
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  color="primary"
-                  variant="outlined"
-                  fullWidth
-                  label="Email"
-                  name="email"
-                  value={this.state.email}
-                  onChange={(event) =>
-                    this.setState({
-                      email: event.target.value,
-                    })
-                  }
-                  validators={["required", "isEmail"]}
-                  errorMessages={[
-                    "this field is required",
-                    "email is not valid",
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  color="primary"
-                  variant="outlined"
-                  fullWidth
-                  label="Password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={(event) =>
-                    this.setState({
-                      password: event.target.value,
-                    })
-                  }
-                  validators={["required", "minStringLength: 2"]}
-                  errorMessages={[
-                    "this field is required",
-                    "password must be at least two characters",
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="Builder Name"
-                  value={this.state.builderName}
-                  onChange={(event) =>
-                    this.setState({
-                      builderName: event.target.value,
-                    })
-                  }
-                  validators={["required", "minStringLength:2"]}
-                  errorMessages={[
-                    "this field is required",
-                    "The length must longer than 2",
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="Address"
-                  value={this.state.address}
-                  onChange={(event) =>
-                    this.setState({
-                      address: event.target.value,
-                    })
-                  }
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  color="primary"
-                  variant="outlined"
-                  fullWidth
-                  label="Postcode"
-                  value={this.state.postcode}
-                  onChange={(event) =>
-                    this.setState({
-                      postcode: event.target.value,
-                    })
-                  }
-                  validators={["required", "matchRegexp:^[0-9]{4}$"]}
-                  errorMessages={[
-                    "this field is required",
-                    "postcode is not valid",
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="Telephone Number"
-                  value={this.state.telephoneNumber}
-                  onChange={(event) =>
-                    this.setState({
-                      telephoneNumber: event.target.value,
-                    })
-                  }
-                  validators={["required", "matchRegexp:^[0-9]{10}$"]}
-                  errorMessages={[
-                    "this field is required",
-                    "phone number is not valid",
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="ABN Number"
-                  value={this.state.ABNNumber}
-                  onChange={(event) =>
-                    this.setState({
-                      ABNNumber: event.target.value,
-                    })
-                  }
-                  validators={["required", "matchRegexp:^[0-9]{11}$"]}
-                  errorMessages={["this field is required", "ABN is not valid"]}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
-            </Grid>
-            {!this.state.isLoading && !!this.state.error && (
-              <Alert severity="error">User already exits.</Alert>
-            )}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+      <Fragment>
+        <TopNav />
+        <Container component="main" maxWidth="xs" className={classes.container}>
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              BUILDER SIGN UP
+            </Typography>
+            <ValidatorForm
+              className={classes.form}
+              instantValidate={false}
+              onSubmit={this.handleSubmit}
             >
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                Already have an account?
-                <Link to="/signin">Sign in.</Link>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextValidator
+                    variant="outlined"
+                    fullWidth
+                    label="User Name"
+                    value={this.state.username}
+                    onChange={(event) =>
+                      this.setState({
+                        username: event.target.value,
+                      })
+                    }
+                    validators={["required", "minStringLength: 2"]}
+                    errorMessages={[
+                      "this field is required",
+                      "username must be at least two characters",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    color="primary"
+                    variant="outlined"
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={(event) =>
+                      this.setState({
+                        email: event.target.value,
+                      })
+                    }
+                    validators={["required", "isEmail"]}
+                    errorMessages={[
+                      "this field is required",
+                      "email is not valid",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    color="primary"
+                    variant="outlined"
+                    fullWidth
+                    label="Password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={(event) =>
+                      this.setState({
+                        password: event.target.value,
+                      })
+                    }
+                    validators={["required", "minStringLength: 2"]}
+                    errorMessages={[
+                      "this field is required",
+                      "password must be at least two characters",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    variant="outlined"
+                    fullWidth
+                    label="Builder Name"
+                    value={this.state.builderName}
+                    onChange={(event) =>
+                      this.setState({
+                        builderName: event.target.value,
+                      })
+                    }
+                    validators={["required", "minStringLength:2"]}
+                    errorMessages={[
+                      "this field is required",
+                      "The length must longer than 2",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    variant="outlined"
+                    fullWidth
+                    label="Address"
+                    value={this.state.address}
+                    onChange={(event) =>
+                      this.setState({
+                        address: event.target.value,
+                      })
+                    }
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    color="primary"
+                    variant="outlined"
+                    fullWidth
+                    label="Postcode"
+                    value={this.state.postcode}
+                    onChange={(event) =>
+                      this.setState({
+                        postcode: event.target.value,
+                      })
+                    }
+                    validators={["required", "matchRegexp:^[0-9]{4}$"]}
+                    errorMessages={[
+                      "this field is required",
+                      "postcode is not valid",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    variant="outlined"
+                    fullWidth
+                    label="Telephone Number"
+                    value={this.state.telephoneNumber}
+                    onChange={(event) =>
+                      this.setState({
+                        telephoneNumber: event.target.value,
+                      })
+                    }
+                    validators={["required", "matchRegexp:^[0-9]{10}$"]}
+                    errorMessages={[
+                      "this field is required",
+                      "phone number is not valid",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                    variant="outlined"
+                    fullWidth
+                    label="ABN Number"
+                    value={this.state.ABNNumber}
+                    onChange={(event) =>
+                      this.setState({
+                        ABNNumber: event.target.value,
+                      })
+                    }
+                    validators={["required", "matchRegexp:^[0-9]{11}$"]}
+                    errorMessages={[
+                      "this field is required",
+                      "ABN is not valid",
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox value="allowExtraEmails" color="primary" />
+                    }
+                    label="I want to receive inspiration, marketing promotions and updates via email."
+                  />
+                </Grid>
               </Grid>
-            </Grid>
-          </ValidatorForm>
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
+              {!this.state.isLoading && !!this.state.error && (
+                <Alert severity="error">User already exits.</Alert>
+              )}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Sign Up
+              </Button>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  Already have an account?
+                  <Link to="/signin">Sign in.</Link>
+                </Grid>
+              </Grid>
+            </ValidatorForm>
+          </div>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
+        </Container>
+      </Fragment>
     );
   }
 }

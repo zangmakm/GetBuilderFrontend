@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Alert from "@material-ui/lab/Alert";
@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
+import TopNav from "../../navigation/TopNav";
 import {
   setToken,
   getTokenRole,
@@ -26,7 +27,7 @@ import { login as loginFn } from "../../api/auth";
 
 const useStyles = (theme) => ({
   container: {
-    paddingTop: "0",
+    paddingTop: "10vh",
     height: "100vh",
   },
   paper: {
@@ -139,97 +140,95 @@ class SignIn extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Container component="main" maxWidth="xs" className={classes.container}>
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="User Name"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-              autoFocus
-              //error={this.state.username === ""}
-              //   helperText={
-              //     this.state.username === "" ? "This field is required!" : " "
-              //   }
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            {!!this.state.error && (
-              <Alert variant="outlined" severity="error">
-                Invalidate username or password. <br />
-              </Alert>
-            )}
-            <Button
-              //type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={this.login}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              Not sign up?
-              <Grid item>
-                <Link
-                  variant="body2"
-                  to={{
-                    pathname: "/signup/user/client",
-                    role: "client",
-                  }}
-                >
-                  Create a client account.
-                </Link>
+      <Fragment>
+        <TopNav />
+        <Container component="main" maxWidth="xs" className={classes.container}>
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="User Name"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              {!!this.state.error && (
+                <Alert variant="outlined" severity="error">
+                  Invalidate username or password. <br />
+                </Alert>
+              )}
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={this.login}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                Not sign up?
+                <Grid item>
+                  <Link
+                    variant="body2"
+                    to={{
+                      pathname: "/signup/user/client",
+                      role: "client",
+                    }}
+                  >
+                    Create a client account.
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid container>
-              OR
-              <Grid item>
-                <Link
-                  variant="body2"
-                  to={{
-                    pathname: "/signup/user/builder",
-                    role: "builder",
-                  }}
-                >
-                  Create a builder account.
-                </Link>
+              <Grid container>
+                OR
+                <Grid item>
+                  <Link
+                    variant="body2"
+                    to={{
+                      pathname: "/signup/user/builder",
+                      role: "builder",
+                    }}
+                  >
+                    Create a builder account.
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
+      </Fragment>
     );
   }
 }
