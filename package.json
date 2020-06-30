@@ -22,7 +22,13 @@
     "react-scripts": "3.4.1",
     "reactstrap": "^8.4.1",
     "recharts": "^1.8.5",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "@material-ui/styles": "^4.2.1",
+    "chart.js": "^2.8.0",
+    "clsx": "^1.0.4",
+    "react-perfect-scrollbar": "^1.5.3",
+    "react-chartjs-2": "^2.7.6",
+    "validate.js": "^0.13.1"
   },
   "scripts": {
     "start": "react-scripts start",

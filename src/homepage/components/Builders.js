@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import FlexContainer from "../UI/FlexContainer";
-import VerticallyCenteredmodal from "../UI/VerticallyCenteredmodal";
+import FlexContainer from "../../UI/FlexContainer";
+import VerticallyCenteredmodal from "../../UI/VerticallyCenteredmodal";
 
 const avatarStyle = {
   verticalAlign: "middle",

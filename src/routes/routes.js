@@ -1,13 +1,12 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import HomeView from "../homepage/HomeView";
 import ServiceView from "../service/ServiceView";
-import profile from "../profile/profile";
 import SignIn from "../authorization/signin/SignIn";
 import SignupBuilder from "../authorization/signup/builder/SignupBuilder";
 import SignupClient from "../authorization/signup/client/SignupClient";
 import Dashboard from "../client/Dashboard";
-import Builder from "../builder/Builders";
+import Builder from "../builder/Builder";
 import ProtectedBuilderRoute from "./componet/ProtectBuilderRoute";
 import ProtectedClientRoute from "./componet/ProtectedClientRoute";
 import {
@@ -23,9 +22,9 @@ import {
 const Routes = () => {
   return (
     <Switch>
+      <Redirect exact from="/" to={HOMEPAGE_URL} />
       <Route exact path={HOMEPAGE_URL} component={HomeView} />
       <Route exact path={SERVICE_URL} component={ServiceView} />
-      <Route exact path="/profile" component={profile} />
       <Route exact path={SIGNIN_URL} component={SignIn} />
       <Route
         exact
@@ -39,7 +38,7 @@ const Routes = () => {
       />
       <ProtectedBuilderRoute
         path={`${BUILDER_BASE_URL}/:builderId`}
-        component={Dashboard}
+        component={Builder}
       />
       <ProtectedClientRoute
         path={`${CLIENT_BASE_URL}/:clientId`}
