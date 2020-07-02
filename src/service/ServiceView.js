@@ -21,6 +21,7 @@ class ServiceView extends Component {
     bathrooms: "",
     garages: "",
     address: "",
+    postDate: "",
     dueDate: "",
     error: null,
     isCreating: false,
@@ -30,6 +31,14 @@ class ServiceView extends Component {
     const key = event.target.name;
     const value = event.target.value;
     this.setState({ [key]: value });
+  };
+
+  handleOption = (key, option) => {
+    this.setState({ [key]: option });
+  };
+
+  clearOption = (key, option) => {
+    this.setState({ [key]: "" });
   };
 
   handleCreate = () => {
@@ -51,7 +60,11 @@ class ServiceView extends Component {
         <TopNav />
         <Header />
         <Content>
-          <Detail handleChange={this.handleChange} />
+          <Detail
+            handleChange={this.handleChange}
+            handleOption={this.handleOption}
+            clearOption={this.clearOption}
+          />
           <Calculator handleSubmit={this.handleCreate} />
         </Content>
       </React.Fragment>
