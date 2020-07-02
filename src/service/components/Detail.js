@@ -18,6 +18,21 @@ const DetailContainer = styled.div`
 `;
 
 class Detail extends Component {
+  state = {
+    storeys: false,
+    bedrooms: false,
+    bathrooms: false,
+    garages: false,
+  };
+
+  handleEnable = (key) => {
+    this.setState({ [key]: true });
+  };
+
+  clearEnable = (key) => {
+    this.setState({ [key]: false });
+  };
+
   render() {
     return (
       <DetailContainer>
@@ -34,7 +49,11 @@ class Detail extends Component {
                 <OptionList
                   name="storeys"
                   option={option}
-                  on={this.props.handleChange}
+                  handleOption={this.props.handleOption}
+                  clearOption={this.props.clearOption}
+                  handleEnable={this.handleEnable}
+                  clearEnable={this.clearEnable}
+                  disabled={this.state.storeys}
                 ></OptionList>
               ))}
             </ListGroup>
@@ -50,7 +69,11 @@ class Detail extends Component {
                 <OptionList
                   name="bedrooms"
                   option={option}
-                  onChange={this.props.handleChange}
+                  handleOption={this.props.handleOption}
+                  clearOption={this.props.clearOption}
+                  handleEnable={this.handleEnable}
+                  clearEnable={this.clearEnable}
+                  disabled={this.state.bedrooms}
                 ></OptionList>
               ))}
             </ListGroup>
@@ -66,7 +89,11 @@ class Detail extends Component {
                 <OptionList
                   name="bathrooms"
                   option={option}
-                  onChange={this.props.handleChange}
+                  handleOption={this.props.handleOption}
+                  clearOption={this.props.clearOption}
+                  handleEnable={this.handleEnable}
+                  clearEnable={this.clearEnable}
+                  disabled={this.state.bathrooms}
                 ></OptionList>
               ))}
             </ListGroup>
@@ -82,7 +109,11 @@ class Detail extends Component {
                 <OptionList
                   name="garages"
                   option={option}
-                  onChange={this.props.handleChange}
+                  handleOption={this.props.handleOption}
+                  clearOption={this.props.clearOption}
+                  handleEnable={this.handleEnable}
+                  clearEnable={this.clearEnable}
+                  disabled={this.state.garages}
                 ></OptionList>
               ))}
             </ListGroup>
