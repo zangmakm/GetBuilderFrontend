@@ -6,11 +6,11 @@ import TopNav from "../navigation/TopNav";
 
 function HomeView() {
   return (
-    <div>
+    <React.Fragment>
       <TopNav />
       <VideoHeader />
       <HomeBody />
-    </div>
+    </React.Fragment>
   );
 }
 

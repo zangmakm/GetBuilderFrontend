@@ -28,10 +28,10 @@ class VideoHeader extends React.Component {
       <section>
         <video src={homeHeader} autoPlay muted loop></video>
         <div className="homeHeader-text">
-          <h1>Builder Website</h1>
+          <h1>Builders Buddy</h1>
           <h3>We build all through QUEENSLAND</h3>
           <FindMoreBtn>
-            <Link to="/service">Post an task</Link>
+            <Link to="/service">Post a task</Link>
           </FindMoreBtn>
         </div>
       </section>

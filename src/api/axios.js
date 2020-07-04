@@ -1,11 +1,26 @@
 import axios from "axios";
+import { getToken } from "../utils/auth";
 
 axios.defaults.baseURL = "https://get-builder.herokuapp.com/api";
 
-export const get = (url) => axios.get(url);
+const appendAuthToken = (config) => {
+  const jwtToken = getToken();
+  const Authorization = jwtToken && `Bearer ${jwtToken}`;
 
-export const post = (url, data) => axios.post(url, data);
+  return { ...config, headers: { Authorization, ...config.header } };
+};
 
-export const put = (url, data) => axios.put(url, data);
+export const get = (url, config = {}) =>
+  axios.get(url, appendAuthToken(config));
 
-export const del = (url) => axios.delete(url);
+export const post = (url, data, config = {}) =>
+  axios.post(url, data, appendAuthToken(config));
+
+export const put = (url, data, config = {}) =>
+  axios.put(url, data, appendAuthToken(config));
+
+export const del = (url, config = {}) =>
+  axios.delete(url, appendAuthToken(config));
+
+export const patch = (url, data, config = {}) =>
+  axios.patch(url, data, appendAuthToken(config));

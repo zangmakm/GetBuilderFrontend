@@ -37,15 +37,15 @@ class Detail extends Component {
     return (
       <DetailContainer>
         <Form>
-          <h3>See how little it could cost...</h3>
+          <h3>See how much it could cost...</h3>
           <Form.Group>
             <FaHome />
             <Form.Label className="detail-label">
-              How many storeys do you want to build?
+              How many storeys do you want to build? *
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2", "3", "4", "5+"].map((option) => (
+              {["1", "2"].map((option) => (
                 <OptionList
                   name="storeys"
                   option={option}
@@ -61,11 +61,11 @@ class Detail extends Component {
           <Form.Group>
             <FaBed />
             <Form.Label className="detail-label">
-              And how many bedrooms do you want?
+              And how many bedrooms do you want? *
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2", "3+"].map((option) => (
+              {["2", "3", "4", "5", "6"].map((option) => (
                 <OptionList
                   name="bedrooms"
                   option={option}
@@ -81,11 +81,11 @@ class Detail extends Component {
           <Form.Group>
             <FaBath />
             <Form.Label className="detail-label">
-              And how many bathrooms do you want?
+              And how many bathrooms do you want? *
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2"].map((option) => (
+              {["1", "2", "3", "4"].map((option) => (
                 <OptionList
                   name="bathrooms"
                   option={option}
@@ -101,7 +101,7 @@ class Detail extends Component {
           <Form.Group>
             <FaCarAlt />
             <Form.Label className="detail-label">
-              And how many garages do you want?
+              And how many garages do you want? *
             </Form.Label>
             <br />
             <ListGroup horizontal>
