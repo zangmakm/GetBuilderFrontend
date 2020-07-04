@@ -86,7 +86,7 @@ function ContactForm(props) {
                 Taste the holidays of the everyday close to home.
               </Typography>
               <TextField
-                noBorder
+                noborder="true"
                 className={classes.textField}
                 placeholder="Your email"
               />

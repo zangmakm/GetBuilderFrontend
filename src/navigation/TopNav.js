@@ -47,12 +47,12 @@ const TopNav = () => {
       <NavContainer>
         <li>
           <NavLink to="/home" activeStyle={activeStyle}>
-            Home
+            HOME
           </NavLink>
         </li>
         <li>
           <NavLink to="/service" activeStyle={activeStyle}>
-            Order
+            HOUSE PACKAGES
           </NavLink>
         </li>
         <li>
@@ -67,7 +67,7 @@ const TopNav = () => {
             }
             activeStyle={activeStyle}
           >
-            DashBoard
+            DASHBOARD
           </StyledDashboard>
         </li>
         <li>
@@ -76,7 +76,7 @@ const TopNav = () => {
             isloggedin={isLoggedIn() ? 1 : 0}
             activeStyle={activeStyle}
           >
-            SignIn
+            SIGNIN
           </StyledSignin>
         </li>
       </NavContainer>

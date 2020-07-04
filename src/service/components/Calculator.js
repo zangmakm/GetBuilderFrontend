@@ -17,6 +17,11 @@ const Ad = styled.div`
   }
 `;
 
+const Price = styled.div`
+  text-align: center;
+  font-size: 2rem;
+`;
+
 const CalButton = styled.div`
   padding: 3px 10px;
   margin-top: 10%;
@@ -34,6 +39,9 @@ class Calculator extends Component {
       <CalContainer>
         <h4>ESTIMATED PRICE*</h4>
         <Ad>
+          <Price>{this.props.price}</Price>
+        </Ad>
+        <Ad>
           <span style={{ color: "green" }}>
             <FiCheck />
           </span>
@@ -43,7 +51,7 @@ class Calculator extends Component {
           <span style={{ color: "green" }}>
             <FiCheck />
           </span>
-          <span>1000's of reviewed cleaners</span>
+          <span>1000's of reviewed builders</span>
         </Ad>
         <Ad>
           <span style={{ color: "green" }}>
