@@ -4,15 +4,13 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Divider, Drawer } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import PeopleIcon from "@material-ui/icons/People";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import TextFieldsIcon from "@material-ui/icons/TextFields";
-import ImageIcon from "@material-ui/icons/Image";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import SettingsIcon from "@material-ui/icons/Settings";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 
-import { Profile, SidebarNav, UpgradePlan } from "./components";
+import { Profile, SidebarNav } from "./components";
 import { BUILDER_BASE_URL } from "../../../../../routes/URLMap";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,25 +49,13 @@ const Sidebar = (props) => {
     {
       title: "Browse All Tasks",
       href: `${BUILDER_BASE_URL}/${builderId}/browse-order`,
-      icon: <ShoppingBasketIcon />,
+      icon: <FormatListBulletedIcon />,
     },
     {
       title: "Order Management",
       href: `${BUILDER_BASE_URL}/${builderId}/order-management`,
-      icon: <PeopleIcon />,
+      icon: <ShoppingBasketIcon />,
     },
-
-    // {
-    //   title: 'Authentication',
-    //   href: '/sign-in',
-    //   icon: <LockOpenIcon />
-    // },
-
-    // {
-    //   title: 'Icons',
-    //   href: '/icons',
-    //   icon: <ImageIcon />
-    // },
     {
       title: "Account",
       href: `${BUILDER_BASE_URL}/${builderId}/account`,
@@ -83,7 +69,8 @@ const Sidebar = (props) => {
     {
       title: "LogOut",
       href: `${BUILDER_BASE_URL}/${builderId}/logout`,
-      icon: <TextFieldsIcon />,
+      icon: <ExitToAppIcon />,
+      onClick: "handleLogOut",
     },
   ];
 

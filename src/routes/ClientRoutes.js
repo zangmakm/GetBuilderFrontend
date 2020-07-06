@@ -47,13 +47,6 @@ const ClientRoutes = () => {
         layout={MainLayout}
         path={`${CLIENT_BASE_URL}/:clientId/order-management`}
       />
-
-      {/* <RouteWithLayout
-        component={IconsView}
-        exact
-        layout={MainLayout}
-        path="/icons"
-      /> */}
       <RouteWithLayout
         component={AccountView}
         exact
@@ -67,28 +60,10 @@ const ClientRoutes = () => {
         path={`${CLIENT_BASE_URL}/:clientId/settings`}
       />
       <RouteWithLayout
-        component={TypographyView}
-        exact
-        layout={MainLayout}
-        path={`${CLIENT_BASE_URL}/:clientId/logout`}
-      />
-      <RouteWithLayout
         layout={MainLayout}
         path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId`}
         component={OrderDetail}
       />
-      {/* <RouteWithLayout
-        component={SignUpView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-up"
-      />
-      <RouteWithLayout
-        component={SignInView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-in"
-      /> */}
       <RouteWithLayout
         component={NotFoundView}
         exact
