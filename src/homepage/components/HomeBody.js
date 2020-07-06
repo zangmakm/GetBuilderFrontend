@@ -3,7 +3,7 @@ import builderPng from "../assets/customer.png";
 import pricePng from "../assets/price.png";
 import supportPng from "../assets/technical-support.png";
 import MyCard from "../../UI/Card/MyCard";
-import { fetchBuilders } from "../../api/builders";
+import { fetchBuilders } from "../../api/builder";
 import Builders from "./Builders";
 import FlexContainer from "../../UI/FlexContainer";
 import ServiceList from "../../service/ServiceList";

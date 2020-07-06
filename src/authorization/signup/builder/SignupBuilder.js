@@ -16,7 +16,7 @@ import { withStyles } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { BUILDER_BASE_URL } from "../../../routes/URLMap";
 import { signup as signupFn } from "../../../api/auth";
-import { createBuilder } from "../../../api/builders";
+import { createBuilder } from "../../../api/builder";
 import TopNav from "../../../navigation/TopNav";
 import {
   setToken,
