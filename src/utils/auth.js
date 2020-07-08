@@ -26,6 +26,12 @@ export const getTokenRole = () => {
   return decodedToken.role;
 };
 
+export const getTokenUserId = () => {
+  const token = localStorage.getItem(JWT_TOKEN_NAME);
+  const decodedToken = jwt.decode(token);
+  return decodedToken.id;
+};
+
 export const isLoggedIn = () => {
   const token = localStorage.getItem(JWT_TOKEN_NAME);
 
