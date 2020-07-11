@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./topNav.scss";
 import { isLoggedIn } from "../utils/auth";
 import { getBuilderId, getClientId } from "../utils/auth";
+import logoImg from "./logo.png";
 
 const NavContainer = styled.ul`
   display: flex;
@@ -46,6 +47,10 @@ const TopNav = () => {
     <nav className="nav">
       <NavContainer>
         <li>
+          <img
+            src={logoImg}
+            style={{ maxWidth: "100px", marginRight: "5px" }}
+          />
           <NavLink to="/home" activeStyle={activeStyle}>
             HOME
           </NavLink>
