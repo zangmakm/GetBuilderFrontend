@@ -1,4 +1,4 @@
-import Routes from "./routes/Routes";
+import Routes from "./routes/routes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
