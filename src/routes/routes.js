@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import HomeView from "../homepage/HomeView";
+import SupportView from "../support/SupportView";
 import ServiceView from "../service/ServiceView";
 import SignIn from "../authorization/signin/SignIn";
 import SignupBuilder from "../authorization/signup/builder/SignupBuilder";
@@ -25,6 +26,7 @@ const Routes = () => {
       <Redirect exact from="/" to={HOMEPAGE_URL} />
       <Route exact path={HOMEPAGE_URL} component={HomeView} />
       <Route exact path={SERVICE_URL} component={ServiceView} />
+      <Route exact path={SUPPORT_URL} component={SupportView} />
       <Route exact path={SIGNIN_URL} component={SignIn} />
       <Route
         exact
