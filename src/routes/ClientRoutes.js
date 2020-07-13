@@ -10,7 +10,7 @@ import {
 
 import {
   Dashboard as DashboardView,
-  ProductList as ProductListView,
+  Alltasks as AlltasksView,
   UserList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
@@ -36,7 +36,7 @@ const ClientRoutes = () => {
         path={`${CLIENT_BASE_URL}/:clientId/dashboard`}
       />
       <RouteWithLayout
-        component={ProductListView}
+        component={AlltasksView}
         exact
         layout={MainLayout}
         path={`${CLIENT_BASE_URL}/:clientId/browse-order`}

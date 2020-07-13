@@ -10,7 +10,7 @@ import {
 
 import {
   Dashboard as DashboardView,
-  ProductList as ProductListView,
+  Alltasks as AlltasksView,
   UserList as UserListView,
   Account as AccountView,
   Settings as SettingsView,
@@ -33,7 +33,7 @@ const BuilderRoutes = () => {
         path={`${BUILDER_BASE_URL}/:builderId/dashboard`}
       />
       <RouteWithLayout
-        component={ProductListView}
+        component={AlltasksView}
         exact
         layout={MainLayout}
         path={`${BUILDER_BASE_URL}/:builderId/browse-order`}
