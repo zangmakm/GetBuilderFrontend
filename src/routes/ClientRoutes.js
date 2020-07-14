@@ -1,24 +1,23 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 
-import { RouteWithLayout } from "../builder/components";
+import { RouteWithLayout } from "../client/components";
 import { CLIENT_BASE_URL } from "./URLMap";
 import {
   Main as MainLayout,
   Minimal as MinimalLayout,
-} from "../builder/layouts";
+} from "../client/layouts";
 
 import {
   Dashboard as DashboardView,
-  Alltasks as AlltasksView,
   UserList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
-} from "../builder/views";
-import OrderDetail from "../client/OrderDetail";
+} from "../client/views";
+import OrderDetail from "../order/OrderDetail";
 
 const ClientRoutes = () => {
   return (
@@ -34,12 +33,6 @@ const ClientRoutes = () => {
         exact
         layout={MainLayout}
         path={`${CLIENT_BASE_URL}/:clientId/dashboard`}
-      />
-      <RouteWithLayout
-        component={AlltasksView}
-        exact
-        layout={MainLayout}
-        path={`${CLIENT_BASE_URL}/:clientId/browse-order`}
       />
       <RouteWithLayout
         component={UserListView}
@@ -68,9 +61,9 @@ const ClientRoutes = () => {
         component={NotFoundView}
         exact
         layout={MinimalLayout}
-        path="/not-found"
+        path={`${CLIENT_BASE_URL}/:clientId/not-found`}
       />
-      <Redirect to="/not-found" />
+      <Redirect to={`${CLIENT_BASE_URL}/:clientId/not-found`} />
     </Switch>
   );
 };

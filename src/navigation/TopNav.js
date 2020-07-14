@@ -8,7 +8,8 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const activeStyle = {
-  textDecoration: "underline",
+  borderBottom: "solid 2px ",
+  paddingBottom: "1px",
 };
 
 const StyledSignin = styled(NavLink)`
@@ -30,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
 }));
-
-// const isLoggedIn = () => {
-//   return false;
-// };
 
 const TopNav = () => {
   const classes = useStyles();

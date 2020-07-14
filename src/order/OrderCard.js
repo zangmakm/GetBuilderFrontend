@@ -100,7 +100,7 @@ const OrderCard = (props) => {
           <Grid className={classes.statsItem} item>
             <GetAppIcon className={classes.statsIcon} />
             <Typography display="inline" variant="body1">
-              {order.status}
+              {order.status} Order
             </Typography>
           </Grid>
         </Grid>

@@ -6,8 +6,8 @@ import ServiceView from "../service/ServiceView";
 import SignIn from "../authorization/signin/SignIn";
 import SignupBuilder from "../authorization/signup/builder/SignupBuilder";
 import SignupClient from "../authorization/signup/client/SignupClient";
-import Dashboard from "../client/Dashboard";
 import Builder from "../builder/Builder";
+import Client from "../client/Client";
 import ProtectedBuilderRoute from "./componet/ProtectBuilderRoute";
 import ProtectedClientRoute from "./componet/ProtectedClientRoute";
 import {
@@ -44,7 +44,7 @@ const Routes = () => {
       />
       <ProtectedClientRoute
         path={`${CLIENT_BASE_URL}/:clientId`}
-        component={Dashboard}
+        component={Client}
       />
     </Switch>
   );
