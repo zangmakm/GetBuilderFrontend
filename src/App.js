@@ -5,7 +5,7 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import React from "react";
 import "./App.css";
 import { ThemeProvider } from "@material-ui/styles";
-import theme from "../src/builder/theme";
+import theme from "./builder/theme";
 
 function App() {
   return (
