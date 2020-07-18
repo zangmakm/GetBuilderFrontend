@@ -20,7 +20,7 @@ export default function SupportItem(props) {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} sm={4} component={Link} to="#">
+    <Grid item xs={12} sm={4} component={Link} to="/signin">
       <Paper className={classes.paper}>{props.label}</Paper>
     </Grid>
   );

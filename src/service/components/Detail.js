@@ -45,8 +45,9 @@ class Detail extends Component {
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2"].map((option) => (
+              {["1", "2"].map((option, i) => (
                 <OptionList
+                  key={i}
                   name="storeys"
                   option={option}
                   handleOption={this.props.handleOption}
@@ -65,8 +66,9 @@ class Detail extends Component {
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["2", "3", "4", "5", "6"].map((option) => (
+              {["2", "3", "4", "5", "6"].map((option, i) => (
                 <OptionList
+                  key={i}
                   name="bedrooms"
                   option={option}
                   handleOption={this.props.handleOption}
@@ -85,8 +87,9 @@ class Detail extends Component {
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2", "3", "4"].map((option) => (
+              {["1", "2", "3", "4"].map((option, i) => (
                 <OptionList
+                  key={i}
                   name="bathrooms"
                   option={option}
                   handleOption={this.props.handleOption}
@@ -105,8 +108,9 @@ class Detail extends Component {
             </Form.Label>
             <br />
             <ListGroup horizontal>
-              {["1", "2"].map((option) => (
+              {["1", "2"].map((option, i) => (
                 <OptionList
+                  key={i}
                   name="garages"
                   option={option}
                   handleOption={this.props.handleOption}

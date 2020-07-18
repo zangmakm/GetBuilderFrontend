@@ -6,10 +6,22 @@ import MyCard from "../../UI/Card/MyCard";
 import { fetchBuilders } from "../../api/builder";
 import Builders from "./Builders";
 import FlexContainer from "../../UI/FlexContainer";
+import { Seperator } from "../../UI/Seperator/Seperator";
 import ServiceList from "../../service/ServiceList";
 import ContactForm from "./ContactForm";
 import Footer from "./Footer";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import CountUp from "react-countup";
+import { GiAchievement, GiAges, GiChart } from "react-icons/gi";
+
+const centeredText = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  color: "white",
+  textTransform: "uppercase",
+};
 
 class HomeBody extends React.Component {
   state = {
@@ -78,6 +90,25 @@ class HomeBody extends React.Component {
             </FlexContainer>
           </div>
           <ServiceList />
+          <Seperator>
+            <div style={centeredText}>
+              <h1>your best choice of builders</h1>
+              <FlexContainer>
+                <h2 style={{ margin: "5px 10px" }}>
+                  <GiAchievement />
+                  <CountUp start={0} end={3594} duration={2} />
+                </h2>
+                <h2 style={{ margin: "5px 10px" }}>
+                  <GiAges />
+                  <CountUp start={0} end={536} duration={2} />
+                </h2>
+                <h2 style={{ margin: "5px 10px" }}>
+                  <GiChart />
+                  <CountUp start={0} end={2651} duration={2} />
+                </h2>
+              </FlexContainer>
+            </div>
+          </Seperator>
           <Builders
             builders={this.state.builders}
             loading={this.state.isLoading}
