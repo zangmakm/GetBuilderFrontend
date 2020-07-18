@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FiCheck } from "react-icons/fi";
+import CountUp from "react-countup";
 
 const CalContainer = styled.div`
   background-color: #fff;
@@ -39,7 +40,15 @@ class Calculator extends Component {
       <CalContainer>
         <h4>ESTIMATED PRICE*</h4>
         <Ad>
-          <Price>{this.props.price}</Price>
+          <Price>
+            $
+            <CountUp
+              start={0}
+              end={this.props.price}
+              duration={2}
+              separator=","
+            />
+          </Price>
         </Ad>
         <Ad>
           <span style={{ color: "green" }}>

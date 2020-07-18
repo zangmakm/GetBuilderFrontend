@@ -19,7 +19,7 @@ const services = [
 
 const ServiceList = () => {
   return (
-    <div style={{ marginTop: "5%" }}>
+    <div style={{ margin: "10% 0" }}>
       <h3 style={{ textAlign: "center" }}>All We Provide</h3>
       <GridContainer>
         {services.map((service) => (

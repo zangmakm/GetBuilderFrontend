@@ -24,7 +24,7 @@ class ServiceView extends Component {
     garages: 0,
     address: "",
     dueDate: "",
-    price: "0",
+    price: 0,
     error: null,
     isCreating: false,
   };
@@ -37,7 +37,7 @@ class ServiceView extends Component {
       this.state.garages * 50000;
 
     this.setState({
-      price: convertCurrency(totalPrice),
+      price: totalPrice,
     });
   };
 
