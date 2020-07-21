@@ -46,15 +46,16 @@ const Sidebar = (props) => {
       href: `${BUILDER_BASE_URL}/${builderId}/dashboard`,
       icon: <DashboardIcon />,
     },
+
     {
       title: "Browse All Tasks",
       href: `${BUILDER_BASE_URL}/${builderId}/browse-order`,
-      icon: <FormatListBulletedIcon />,
+      icon: <ShoppingBasketIcon />,
     },
     {
       title: "Order Management",
       href: `${BUILDER_BASE_URL}/${builderId}/order-management`,
-      icon: <ShoppingBasketIcon />,
+      icon: <FormatListBulletedIcon />,
     },
     {
       title: "Account",

@@ -13,6 +13,7 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core";
+import { LinearProgress } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import TopNav from "../../navigation/TopNav";
 import {
@@ -185,15 +186,20 @@ class SignIn extends React.Component {
                   Invalidate username or password. <br />
                 </Alert>
               )}
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={this.login}
-              >
-                Sign In
-              </Button>
+              {this.state.isLoading ? (
+                <LinearProgress className={classes.root} />
+              ) : (
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={this.login}
+                >
+                  Sign In
+                </Button>
+              )}
+
               <Grid container>
                 Not sign up?
                 <Grid item>

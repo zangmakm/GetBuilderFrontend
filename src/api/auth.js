@@ -17,7 +17,9 @@ export const signup = (data) => {
 
 export const changePassword = (userId, password) => {
   const url = `${API_SIGNUP_URL}/${userId}`;
-  return put(url, password);
+  return put(url, password).then((res) => {
+    return res.data;
+  });
 };
 
 export const getUserId = () => {

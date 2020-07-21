@@ -50,7 +50,7 @@ class AccountProfile extends React.Component {
           <div className={classes.details}>
             <div>
               <Typography gutterBottom variant="h2">
-                {this.props.buildername}
+                {this.props.clientname}
               </Typography>
               <Typography
                 className={classes.locationText}

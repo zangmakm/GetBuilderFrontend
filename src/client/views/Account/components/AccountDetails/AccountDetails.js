@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import Alert from "@material-ui/lab/Alert";
 import { withRouter } from "react-router";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { updateBuilder } from "../../../../../api/builder";
+import { updateClient } from "../../../../../api/client";
+import { withStyles } from "@material-ui/core";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   Card,
   CardHeader,
@@ -14,32 +18,34 @@ import {
   Button,
 } from "@material-ui/core";
 
-const useStyles = () => ({
+const useStyles = (theme) => ({
   root: {},
+
+  radioGroup: {
+    flexDirection: "row",
+  },
 });
 
 class AccountDetails extends React.Component {
   state = {
-    builderName: "",
-    ABNNumber: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    mobile: "",
     email: "",
-    telephoneNumber: "",
-    address: "",
     postcode: "",
-    description: "",
     error: null,
-    isUpdating: false,
+    buttonDisabled: false,
   };
 
   componentDidMount() {
     this.setState({
-      builderName: this.props.state.builderName || "",
-      ABNNumber: this.props.state.ABNNumber || "",
-      email: this.props.state.email || "",
-      telephoneNumber: this.props.state.telephoneNumber || "",
-      address: this.props.state.address || "",
-      postcode: this.props.state.postcode || "",
-      description: this.props.state.description || "",
+      firstName: this.props.client.firstName || "",
+      lastName: this.props.client.lastName || "",
+      gender: this.props.client.gender || "",
+      mobile: this.props.client.mobile || "",
+      email: this.props.client.email || "",
+      postcode: this.props.client.postcode || "",
     });
   }
 
@@ -50,34 +56,34 @@ class AccountDetails extends React.Component {
   };
 
   handleSubmit = () => {
-    const builderId = this.props.match.params.builderId;
-    const builder = {
-      builderName: this.state.builderName,
-      abn: this.state.ABNNumber,
+    const clientId = this.props.match.params.clientId;
+    const client = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      gender: this.state.gender,
+      mobile: this.state.mobile,
       email: this.state.email,
-      mobile: this.state.telephoneNumber,
-      address: this.state.address,
       postcode: this.state.postcode,
-      description: this.state.description,
     };
-    this.setState({ error: null, isUpdating: true }, () => {
-      updateBuilder(builderId, builder)
+
+    this.setState({ error: null, buttonDisabled: true }, () => {
+      updateClient(clientId, client)
         .then(() => {
           this.setState(
             {
-              isUpdating: false,
+              buttonDisabled: false,
             },
             () => {
               window.location.reload();
             }
           );
         })
-        .catch((error) => this.setState({ error, isUpdating: false }));
+        .catch((error) => this.setState({ error, buttonDisabled: false }));
     });
   };
 
   render() {
-    //const { className, ...rest } = this.props;  {...rest} className={clsx(classes.root, className)}
+    //const { className, ...rest } = this.props;
     const { classes } = this.props;
     return (
       <Card>
@@ -91,11 +97,31 @@ class AccountDetails extends React.Component {
             <Grid container spacing={3}>
               <Grid item md={6} xs={12}>
                 <TextValidator
+                  autoComplete="fname"
+                  name="firstName"
                   variant="outlined"
                   fullWidth
-                  label="Builder Name"
-                  name="builderName"
-                  value={this.state.builderName}
+                  id="firstName"
+                  label="First Name"
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
+                  validators={["required", "minStringLength:2"]}
+                  errorMessages={[
+                    "this field is required",
+                    "The length must longer than 2",
+                  ]}
+                  autoFocus
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextValidator
+                  variant="outlined"
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="lname"
+                  value={this.state.lastName}
                   onChange={this.handleChange}
                   validators={["required", "minStringLength:2"]}
                   errorMessages={[
@@ -104,24 +130,40 @@ class AccountDetails extends React.Component {
                   ]}
                 />
               </Grid>
-              <Grid item md={6} xs={12}>
-                <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="ABN Number"
-                  name="ABNNumber"
-                  value={this.state.ABNNumber}
+              <Grid item xs={12}>
+                <RadioGroup
+                  className={classes.radioGroup}
+                  aria-label="gender"
+                  name="gender"
+                  value={this.state.gender}
                   onChange={this.handleChange}
-                  validators={["required", "matchRegexp:^[0-9]{11}$"]}
-                  errorMessages={["this field is required", "ABN is not valid"]}
-                />
+                >
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio color="primary" />}
+                    label="Female"
+                    labelPlacement="end"
+                  />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio color="primary" />}
+                    label="Male"
+                    labelPlacement="end"
+                  />
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                    labelPlacement="end"
+                  />
+                </RadioGroup>
               </Grid>
               <Grid item md={6} xs={12}>
                 <TextValidator
                   color="primary"
                   variant="outlined"
                   fullWidth
-                  label="Email"
+                  label="Email Address"
                   name="email"
                   value={this.state.email}
                   onChange={this.handleChange}
@@ -136,9 +178,9 @@ class AccountDetails extends React.Component {
                 <TextValidator
                   variant="outlined"
                   fullWidth
-                  label="Telephone Number"
-                  name="telephoneNumber"
-                  value={this.state.telephoneNumber}
+                  name="mobile"
+                  label="Contact Number"
+                  value={this.state.mobile}
                   onChange={this.handleChange}
                   validators={["required", "matchRegexp:^[0-9]{10}$"]}
                   errorMessages={[
@@ -149,23 +191,11 @@ class AccountDetails extends React.Component {
               </Grid>
               <Grid item md={6} xs={12}>
                 <TextValidator
-                  variant="outlined"
-                  fullWidth
-                  label="Address"
-                  name="address"
-                  value={this.state.address}
-                  onChange={this.handleChange}
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
-                <TextValidator
                   color="primary"
                   variant="outlined"
                   fullWidth
-                  label="Postcode"
                   name="postcode"
+                  label="Current Residential Postcode"
                   value={this.state.postcode}
                   onChange={this.handleChange}
                   validators={["required", "matchRegexp:^[0-9]{4}$"]}
@@ -175,17 +205,6 @@ class AccountDetails extends React.Component {
                   ]}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextValidator
-                  color="primary"
-                  variant="outlined"
-                  fullWidth
-                  label="Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-              </Grid>
             </Grid>
             {this.state.error && (
               <Alert severity="error">Update Profile Failed !</Alert>
@@ -193,9 +212,20 @@ class AccountDetails extends React.Component {
           </CardContent>
           <Divider />
           <CardActions>
-            <Button type="submit" color="primary" variant="contained">
-              Update Profile
-            </Button>
+            {this.state.buttonDisabled ? (
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                disabled
+              >
+                Update Profile
+              </Button>
+            ) : (
+              <Button type="submit" color="primary" variant="contained">
+                Update Profile
+              </Button>
+            )}
           </CardActions>
         </ValidatorForm>
       </Card>
@@ -207,4 +237,4 @@ AccountDetails.propTypes = {
   className: PropTypes.string,
 };
 
-export default withRouter(AccountDetails);
+export default withRouter(withStyles(useStyles)(AccountDetails));

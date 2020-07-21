@@ -124,11 +124,14 @@ class SignupClient extends React.Component {
               });
             })
             .catch((error) =>
-              this.setState({ error: error.toString(), isLoading: false })
+              this.setState({
+                error: error.response.data.error,
+                isLoading: false,
+              })
             );
         })
         .catch((error) =>
-          this.setState({ error: error.toString(), isLoading: false })
+          this.setState({ error: error.response.data.error, isLoading: false })
         );
     });
   };

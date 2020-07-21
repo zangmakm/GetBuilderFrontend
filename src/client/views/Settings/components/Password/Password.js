@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core";
 import { changePassword } from "../../../../../api/auth";
 import { getTokenUserId } from "../../../../../utils/auth";
@@ -14,12 +13,13 @@ import {
   Button,
   TextField,
   LinearProgress,
-  CircularProgress,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
 const useStyles = (theme) => ({
-  root: {},
+  root: {
+    width: "100%",
+  },
   loading: {
     margin: theme.spacing(2, 0),
   },
@@ -52,25 +52,21 @@ class Password extends React.Component {
     const userId = getTokenUserId();
 
     this.setState({ isFinished: false, isLoading: true, error: null }, () => {
-      //   getUserId()
-      //     .then((userID) => {
       changePassword(userId, passwordInfo)
-        .then(() => {
+        .then((data) => {
+          console.log("data:", data);
           this.setState({
             isLoading: false,
             isFinished: true,
           });
         })
         .catch((error) => {
-          console.log(error);
           this.setState({
             error,
             isLoading: false,
-            errorMessage: error.toString(),
+            errorMessage: error.response.data.error,
           });
         });
-      // })
-      // .catch((error) => this.setValues({ error, isLoading: false }));
     });
   };
 
@@ -117,11 +113,11 @@ class Password extends React.Component {
           <Divider />
           <CardActions>
             {this.state.isLoading ? (
-              <CircularProgress color="secondary" className={classes.loading} />
+              <LinearProgress className={classes.root} />
             ) : (
               <Button
-                color="primary"
                 variant="contained"
+                color="primary"
                 onClick={this.handleSubmit}
               >
                 Update
@@ -130,7 +126,7 @@ class Password extends React.Component {
             {this.state.isFinished && (
               <Alert severity="info"> Successful</Alert>
             )}
-            {!!this.state.error && (
+            {this.state.error && (
               <Alert severity="error">{this.state.errorMessage}</Alert>
             )}
           </CardActions>

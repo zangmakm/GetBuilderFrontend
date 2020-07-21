@@ -28,7 +28,7 @@ class AccountDetails extends React.Component {
     postcode: "",
     description: "",
     error: null,
-    isUpdating: false,
+    buttonDisabled: false,
   };
 
   componentDidMount() {
@@ -60,24 +60,23 @@ class AccountDetails extends React.Component {
       postcode: this.state.postcode,
       description: this.state.description,
     };
-    this.setState({ error: null, isUpdating: true }, () => {
+    this.setState({ error: null, buttonDisabled: true }, () => {
       updateBuilder(builderId, builder)
         .then(() => {
           this.setState(
             {
-              isUpdating: false,
+              buttonDisabled: false,
             },
             () => {
               window.location.reload();
             }
           );
         })
-        .catch((error) => this.setState({ error, isUpdating: false }));
+        .catch((error) => this.setState({ error, buttonDisabled: false }));
     });
   };
 
   render() {
-    //const { className, ...rest } = this.props;  {...rest} className={clsx(classes.root, className)}
     const { classes } = this.props;
     return (
       <Card>
@@ -136,7 +135,7 @@ class AccountDetails extends React.Component {
                 <TextValidator
                   variant="outlined"
                   fullWidth
-                  label="Telephone Number"
+                  label="Contact Number"
                   name="telephoneNumber"
                   value={this.state.telephoneNumber}
                   onChange={this.handleChange}
@@ -193,9 +192,20 @@ class AccountDetails extends React.Component {
           </CardContent>
           <Divider />
           <CardActions>
-            <Button type="submit" color="primary" variant="contained">
-              Update Profile
-            </Button>
+            {this.state.buttonDisabled ? (
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                disabled
+              >
+                Update Profile
+              </Button>
+            ) : (
+              <Button type="submit" color="primary" variant="contained">
+                Update Profile
+              </Button>
+            )}
           </CardActions>
         </ValidatorForm>
       </Card>

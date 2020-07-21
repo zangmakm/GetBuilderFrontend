@@ -1,3 +1,11 @@
+import {
+  NEW_ORDER,
+  CANCEL_CLIENT,
+  ASSIGNED,
+  CANCEL_BUILDER,
+  COMPLETED,
+} from "./variables";
+
 export const convertCurrency = (value) => {
   if (value === null || value === undefined) {
     return 0;
@@ -12,4 +20,37 @@ export const convertCurrency = (value) => {
   }
   digits.unshift("$");
   return digits.join("").trim();
+};
+
+export const getInitials = (name) => {
+  return name
+    .replace(/\s+/, " ")
+    .split(" ")
+    .slice(0, 2)
+    .map((v) => v && v[0].toUpperCase())
+    .join("");
+};
+
+export const getStatusText = (status) => {
+  let statusText;
+  switch (status) {
+    case NEW_ORDER:
+      statusText = "New Order";
+      break;
+    case CANCEL_CLIENT:
+      statusText = "Cancelled by Client";
+      break;
+    case ASSIGNED:
+      statusText = "Assigned";
+      break;
+    case CANCEL_BUILDER:
+      statusText = "Cancelled by Builder";
+      break;
+    case COMPLETED:
+      statusText = "Completed";
+      break;
+    default:
+      statusText = "";
+  }
+  return statusText;
 };

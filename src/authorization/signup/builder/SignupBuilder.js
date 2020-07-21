@@ -112,11 +112,14 @@ class SignupBuilder extends React.Component {
               });
             })
             .catch((error) =>
-              this.setState({ error: error.toString(), isLoading: false })
+              this.setState({
+                error: error.response.data.error,
+                isLoading: false,
+              })
             );
         })
         .catch((error) =>
-          this.setState({ error: error.toString(), isLoading: false })
+          this.setState({ error: error.response.data.error, isLoading: false })
         );
     });
   };
@@ -297,7 +300,7 @@ class SignupBuilder extends React.Component {
                 </Grid>
               </Grid>
               {!this.state.isLoading && !!this.state.error && (
-                <Alert severity="error">User already exits.</Alert>
+                <Alert severity="error">{this.state.error}</Alert>
               )}
               <Button
                 type="submit"

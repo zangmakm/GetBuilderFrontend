@@ -7,11 +7,11 @@ import {
   Main as MainLayout,
   Minimal as MinimalLayout,
 } from "../builder/layouts";
-
+import OrderDetail from "../builder/views/BuildersOrder/OrderDetail";
 import {
   Dashboard as DashboardView,
+  BuildersOrder as BuildersOrderView,
   Alltasks as AlltasksView,
-  UserList as UserListView,
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
@@ -39,7 +39,7 @@ const BuilderRoutes = () => {
         path={`${BUILDER_BASE_URL}/:builderId/browse-order`}
       />
       <RouteWithLayout
-        component={UserListView}
+        component={BuildersOrderView}
         exact
         layout={MainLayout}
         path={`${BUILDER_BASE_URL}/:builderId/order-management`}
@@ -57,12 +57,17 @@ const BuilderRoutes = () => {
         path={`${BUILDER_BASE_URL}/:builderId/settings`}
       />
       <RouteWithLayout
+        layout={MainLayout}
+        path={`${BUILDER_BASE_URL}/:builderId/orders/:orderId`}
+        component={OrderDetail}
+      />
+      <RouteWithLayout
         component={NotFoundView}
         exact
         layout={MinimalLayout}
-        path="/not-found"
+        path={`${BUILDER_BASE_URL}/:builderId/not-found`}
       />
-      <Redirect to="/not-found" />
+      <Redirect to={`${BUILDER_BASE_URL}/:builderId/not-found`} />
     </Switch>
   );
 };

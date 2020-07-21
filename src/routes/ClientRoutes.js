@@ -7,17 +7,15 @@ import {
   Main as MainLayout,
   Minimal as MinimalLayout,
 } from "../client/layouts";
-
 import {
   Dashboard as DashboardView,
-  UserList as UserListView,
-  Typography as TypographyView,
-  Icons as IconsView,
+  ClientsOrder as ClientsOrderView,
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
 } from "../client/views";
-import OrderDetail from "../order/OrderDetail";
+import OrderDetail from "../client/views/ClientsOrder/OrderDetail";
+import OrderEdit from "../client/views/ClientsOrder/components/OrderEdit";
 
 const ClientRoutes = () => {
   return (
@@ -35,7 +33,7 @@ const ClientRoutes = () => {
         path={`${CLIENT_BASE_URL}/:clientId/dashboard`}
       />
       <RouteWithLayout
-        component={UserListView}
+        component={ClientsOrderView}
         exact
         layout={MainLayout}
         path={`${CLIENT_BASE_URL}/:clientId/order-management`}
@@ -53,9 +51,16 @@ const ClientRoutes = () => {
         path={`${CLIENT_BASE_URL}/:clientId/settings`}
       />
       <RouteWithLayout
+        component={OrderDetail}
+        exact
         layout={MainLayout}
         path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId`}
-        component={OrderDetail}
+      />
+      <RouteWithLayout
+        component={OrderEdit}
+        exact
+        layout={MainLayout}
+        path={`${CLIENT_BASE_URL}/:clientId/orders/:orderId/edit`}
       />
       <RouteWithLayout
         component={NotFoundView}
