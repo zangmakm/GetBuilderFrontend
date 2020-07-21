@@ -1,0 +1,143 @@
+$primary-blue: #5e9ceb;
+$disabled-text-color: #c2c2c2;
+
+.order-detail {
+  padding: 20px;
+  margin-bottom: 40px;
+  border-top: solid 3px #eee;
+  &__header {
+    padding-top: 10px;
+    color: $primary-blue;
+    font-weight: 550;
+  }
+  &__top {
+    font-size: 0.9rem;
+    color: $disabled-text-color;
+    &span {
+      font-size: 10px;
+    }
+  }
+  &__head {
+    display: flex;
+    align-items: center;
+  }
+  &__status {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+    li {
+      padding: 5px 10px;
+      border-radius: 20px;
+      color: $disabled-text-color;
+    }
+  }
+  &__postTime {
+    color: $disabled-text-color;
+  }
+  &__map {
+    .MuiButton-text {
+      color: $primary-blue;
+    }
+    .MuiBackdrop-root {
+      z-index: 10;
+    }
+    &--google {
+      height: 960px;
+    }
+  }
+  &__builder {
+    .MuiButton-text {
+      color: $primary-blue;
+    }
+    .MuiBackdrop-root {
+      z-index: 10;
+      background-color: white;
+    }
+  }
+  &__budget {
+    text-align: center;
+  }
+  &__offer {
+    text-align: center;
+    margin-bottom: 20px;
+    .MuiButton-root {
+      margin-bottom: 10px;
+      width: 80%;
+    }
+    .order-detail__btn-disabled {
+      background-color: $disabled-text-color;
+    }
+  }
+  &__share {
+    margin-top: 30px;
+    &--label {
+      background: #f4f6f8;
+      width: fit-content;
+      margin: auto;
+      margin-top: -10px;
+    }
+    .MuiFormLabel-root {
+      padding: 0 10px;
+    }
+    &--whole {
+      display: flex;
+      justify-content: center;
+    }
+    &--single {
+      margin: 10px;
+      color: $primary-blue;
+    }
+  }
+  &__details {
+    margin-top: 40px;
+    &--list {
+      list-style: none;
+      line-height: 1.5;
+      padding-left: 10px;
+    }
+    &--collapse {
+      margin: 0;
+      color: $primary-blue;
+      text-decoration: underline;
+      text-align: right;
+      cursor: pointer;
+    }
+  }
+}
+
+.orders-progress__container {
+  text-align: center;
+  padding-top: 20%;
+}
+
+.order-detail__btn-disabled {
+  background-color: $disabled-text-color;
+}
+
+.order-detail__status .order-detail__status-active {
+  color: white;
+  background-color: $primary-blue;
+}
+
+.order-detail__details--list {
+  display: flex;
+  flex-wrap: wrap;
+  .order-detail__details--singlelist {
+    flex-basis: 50%;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    .order-detail__icon--pic {
+      width: 30px;
+      margin-right: 20px;
+    }
+
+    .order-detail__icon--title {
+      display: inline-block;
+      font-weight: bold;
+      opacity: 0.7;
+    }
+  }
+}

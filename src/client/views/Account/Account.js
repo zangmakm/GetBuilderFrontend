@@ -18,13 +18,12 @@ const useStyles = (theme) => ({
 
 class Account extends React.Component {
   state = {
-    builderName: "",
-    ABNNumber: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    mobile: "",
     email: "",
-    telephoneNumber: "",
-    address: "",
     postcode: "",
-    description: "",
     error: null,
     isLoading: false,
   };
@@ -34,18 +33,16 @@ class Account extends React.Component {
 
   defaultProfile = () => {
     const clientId = this.props.match.params.clientId;
-
     this.setState({ isLoading: true });
     getClient(clientId)
       .then((data) => {
         this.setState({
-          clientName: data.clientName,
-          ABNNumber: data.abn,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          gender: data.gender,
+          mobile: data.mobile,
           email: data.email,
-          telephoneNumber: data.mobile,
-          address: data.address,
           postcode: data.postcode,
-          description: data.description,
           isLoading: false,
         });
       })
@@ -65,10 +62,12 @@ class Account extends React.Component {
         <div className={classes.root}>
           <Grid container spacing={4}>
             <Grid item lg={4} md={6} xl={4} xs={12}>
-              <AccountProfile clientname={this.state.clientName} />
+              <AccountProfile
+                clientname={`${this.state.firstName} ${this.state.lastName}`}
+              />
             </Grid>
             <Grid item lg={8} md={6} xl={8} xs={12}>
-              <AccountDetails state={this.state} />
+              <AccountDetails client={this.state} />
             </Grid>
           </Grid>
         </div>

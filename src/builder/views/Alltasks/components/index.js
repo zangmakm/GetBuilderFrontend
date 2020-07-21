@@ -1,2 +1,4 @@
-export { default as ProductCard } from './ProductCard';
-export { default as ProductsToolbar } from './ProductsToolbar';
+export { default as TasksTable } from "./TasksTable";
+export { TasksToolbar } from "./TasksToolbar";
+export { SortDate } from "./TasksToolbar";
+export { SortPrice } from "./TasksToolbar";

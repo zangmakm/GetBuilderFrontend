@@ -8,7 +8,7 @@ export const createOrder = (clientId, order) => {
   return post(url, order).then((res) => res.data.data);
 };
 
-export const getAllOrders = (page = 1, pageSize = 6) => {
+export const getAllOrders = (page = 1, pageSize = 5) => {
   const stringified = queryString.stringify({
     page,
     pageSize,
@@ -17,4 +17,19 @@ export const getAllOrders = (page = 1, pageSize = 6) => {
     orders: res.data.data,
     pagination: res.data.pagination,
   }));
+};
+
+export const getOrder = (orderId) => {
+  const url = `${API_ORDERS_URL}/${orderId}`;
+  return get(url).then((res) => res.data.data);
+};
+
+export const updateBuilderOrderStatus = (orderId, builderId, status) => {
+  const url = `${API_ORDERS_URL}/${orderId}/builder/${builderId}?status=${status}`;
+  return patch(url, status).then((res) => res.data.data);
+};
+
+export const updateClientOrderStatus = (orderId, clientId, status) => {
+  const url = `${API_ORDERS_URL}/${orderId}/client/${clientId}?status=${status}`;
+  return patch(url, status).then((res) => res.data.data);
 };
