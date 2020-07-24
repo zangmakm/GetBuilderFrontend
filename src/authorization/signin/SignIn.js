@@ -186,20 +186,19 @@ class SignIn extends React.Component {
                   Invalidate username or password. <br />
                 </Alert>
               )}
-              {this.state.isLoading ? (
+              {this.state.isLoading && (
                 <LinearProgress className={classes.root} />
-              ) : (
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  onClick={this.login}
-                >
-                  Sign In
-                </Button>
               )}
-
+              <Button
+                disabled={this.state.isLoading}
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={this.login}
+              >
+                Sign In
+              </Button>
               <Grid container>
                 Not sign up?
                 <Grid item>

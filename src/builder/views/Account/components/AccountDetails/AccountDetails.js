@@ -55,11 +55,12 @@ class AccountDetails extends React.Component {
       builderName: this.state.builderName,
       abn: this.state.ABNNumber,
       email: this.state.email,
-      mobile: this.state.telephoneNumber,
+      mobile: this.state.telephoneNumber.toString(),
       address: this.state.address,
       postcode: this.state.postcode,
       description: this.state.description,
     };
+    console.log("builder:", builder);
     this.setState({ error: null, buttonDisabled: true }, () => {
       updateBuilder(builderId, builder)
         .then(() => {

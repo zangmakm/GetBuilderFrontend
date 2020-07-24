@@ -24,6 +24,7 @@ class Account extends React.Component {
     mobile: "",
     email: "",
     postcode: "",
+    clientPhoto: "",
     error: null,
     isLoading: false,
   };
@@ -33,20 +34,22 @@ class Account extends React.Component {
 
   defaultProfile = () => {
     const clientId = this.props.match.params.clientId;
-    this.setState({ isLoading: true });
-    getClient(clientId)
-      .then((data) => {
-        this.setState({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          gender: data.gender,
-          mobile: data.mobile,
-          email: data.email,
-          postcode: data.postcode,
-          isLoading: false,
-        });
-      })
-      .catch((error) => this.setState({ error, isLoading: false }));
+    this.setState({ isLoading: true }, () => {
+      getClient(clientId)
+        .then((data) => {
+          this.setState({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            gender: data.gender,
+            mobile: data.mobile,
+            email: data.email,
+            postcode: data.postcode,
+            clientPhoto: data.photo,
+            isLoading: false,
+          });
+        })
+        .catch((error) => this.setState({ error, isLoading: false }));
+    });
   };
 
   render() {
@@ -54,7 +57,7 @@ class Account extends React.Component {
     if (this.state.isLoading) {
       return (
         <div className={classes.loading}>
-          <CircularProgress size={100} color="secondary" />
+          <CircularProgress size={150} color="secondary" />
         </div>
       );
     } else {
@@ -64,6 +67,7 @@ class Account extends React.Component {
             <Grid item lg={4} md={6} xl={4} xs={12}>
               <AccountProfile
                 clientname={`${this.state.firstName} ${this.state.lastName}`}
+                clientphoto={this.state.clientPhoto}
               />
             </Grid>
             <Grid item lg={8} md={6} xl={8} xs={12}>

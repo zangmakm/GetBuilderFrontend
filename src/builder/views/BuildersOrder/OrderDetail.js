@@ -19,6 +19,7 @@ import bedroomPic from "../../../assets/images/bedroom.png";
 import bathroomPic from "../../../assets/images/bathroom.png";
 import garagePic from "../../../assets/images/garage.png";
 import { convertCurrency } from "../../../utils/helper";
+import ShowOrderComment from "../../../order/ShowOrderComment";
 import {
   NEW_ORDER,
   ASSIGNED,
@@ -50,14 +51,16 @@ class OrderDetail extends React.Component {
     order: {},
     clientName: "",
     client: "",
+    clientPhoto: "",
     builder: "",
+    builderPhoto: "",
     error: null,
     isLoading: false,
     isUpdating: false,
     expanded: false,
     star: 0,
     comment: "",
-    showCommentModal: false,
+    showComment: false,
   };
 
   componentDidMount() {
@@ -78,14 +81,17 @@ class OrderDetail extends React.Component {
         .then(() => {
           console.log("order:", this.state.order);
           this.setState({
-            builder: this.state.order.takenBy,
-            //builderPhoto: this.state.order.takenBy.photo || "",
-            client: this.state.order.postBy,
-            clientName: this.state.order.postBy.fullName,
+            builder: this.state.order.takenBy || "",
+            client: this.state.order.postBy || "",
+            clientName: this.state.order.postBy.fullName || "",
             clientPhoto: this.state.order.postBy.photo || "",
-            //star: this.state.order.star || "",
-            //comment: this.state.order.comment || "",
+            star: this.state.order.star || "",
+            comment: this.state.order.comment || "",
           });
+          if (this.state.order.takenBy)
+            this.setState({
+              builderPhoto: this.state.order.takenBy.photo,
+            });
         })
         .catch((error) => this.setState({ error, isLoading: false }));
     });
@@ -156,23 +162,19 @@ class OrderDetail extends React.Component {
     this.setState({ expanded: !this.state.expanded });
   };
 
-  handleGoBack = () => {
-    this.props.history.go(-1);
+  showComment = () => {
+    this.setState({ showComment: true });
   };
 
-  showCommentModal = () => {
-    this.setState({ showCommentModal: true });
-  };
-
-  closeCommentModal = () => {
-    this.setState({ showCommentModal: false });
+  closeComment = () => {
+    this.setState({ showComment: false });
   };
 
   renderContent = () => {
     if (this.state.isLoading || this.state.isUpdating) {
       return (
         <div className="orders-progress__container">
-          <CircularProgress size={200} color="secondary" />
+          <CircularProgress size={150} color="secondary" />
         </div>
       );
     } else if (this.state.error) {
@@ -192,20 +194,18 @@ class OrderDetail extends React.Component {
               <div className="order-detail__head">
                 <ul className="order-detail__status">
                   <li className="order-detail__status-active">
-                    {getStatusText(this.state.order.status)}
+                    {getStatusText(this.state.order.status).toUpperCase()}{" "}
+                    BUILDING ORDER
                   </li>
                 </ul>
               </div>
-              <Typography variant="h2" component="h2">
-                House Building
-              </Typography>
               <OrderDetailList
                 clientName={this.state.clientName}
                 address={this.state.order.address}
                 dueDate={this.state.order.dueDate}
                 postDate={this.state.order.postDate}
-                //clientPhoto={this.state.clientPhoto}
-                //builderPhoto={this.state.builderPhoto}
+                clientPhoto={this.state.clientPhoto}
+                builderPhoto={this.state.builderPhoto}
                 builder={this.state.builder}
               />
             </Grid>
@@ -241,7 +241,7 @@ class OrderDetail extends React.Component {
                       <Button
                         color={"primary"}
                         variant="contained"
-                        onClick={this.showCommentModal}
+                        onClick={this.showComment}
                       >
                         VIEW YOUR COMMENT
                       </Button>
@@ -273,16 +273,14 @@ class OrderDetail extends React.Component {
               </Box>
             </Grid>
           </Grid>
-          {/* <ShowOrderComment
-						clientPhoto={this.state.client.photo}
-						clientName={this.state.clientName}
-						star={this.state.star}
-						comment={this.state.comment}
-						showCommentModal={this.state.showCommentModal}
-						closeCommentModal={this.closeCommentModal}
-						orderId={this.state.order._id}
-						builder={this.state.builder}
-					/> */}
+          <ShowOrderComment
+            clientPhoto={this.state.client.photo}
+            clientName={this.state.clientName}
+            star={this.state.star}
+            comment={this.state.comment}
+            open={this.state.showComment}
+            closeComment={this.closeComment}
+          />
           <div className="order-detail__details">
             <Typography variant="h6" component="p">
               DETAILS
@@ -373,12 +371,7 @@ class OrderDetail extends React.Component {
   };
 
   render() {
-    return (
-      <div className="order-detail">
-        <header className="order-detail__header">ORDER INFORMATION</header>
-        {this.renderContent()}
-      </div>
-    );
+    return <div className="order-detail">{this.renderContent()}</div>;
   }
 }
 

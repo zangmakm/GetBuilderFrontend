@@ -14,6 +14,8 @@ import {
 import "./scss/orderDetail.scss";
 import OrderDetailList from "../../../order/OrderDetailList";
 import { getOrder, updateClientOrderStatus } from "../../../api/order";
+import WriteOrderComment from "../../../order/WriteOrderComment";
+import ShowOrderComment from "../../../order/ShowOrderComment";
 import { Alert } from "@material-ui/lab";
 import storeyPic from "../../../assets/images/storey.png";
 import bedroomPic from "../../../assets/images/bedroom.png";
@@ -51,16 +53,19 @@ class OrderDetail extends React.Component {
   state = {
     order: {},
     clientName: "",
+    clientPhoto: "",
     client: "",
     builder: "",
+    builderPhoto: "",
     error: null,
     isLoading: false,
     isUpdating: false,
     expanded: false,
     star: 0,
     comment: "",
-    showCommentModal: false,
-    commentSubmit: false,
+    showComment: false,
+    returnComment: false,
+    writeComment: false,
   };
 
   componentDidMount() {
@@ -79,20 +84,23 @@ class OrderDetail extends React.Component {
           })
         )
         .then(() => {
-          console.log("order:", this.state.order);
           this.setState({
-            builder: this.state.order.takenBy,
-            //builderPhoto: this.state.order.takenBy.photo || "",
-            client: this.state.order.postBy,
-            clientName: this.state.order.postBy.fullName,
+            builder: this.state.order.takenBy || "",
+            client: this.state.order.postBy || "",
+            clientName: this.state.order.postBy.fullName || "",
             clientPhoto: this.state.order.postBy.photo || "",
-            //star: this.state.order.star || "",
-            //comment: this.state.order.comment || "",
+            star: this.state.order.star || "",
+            comment: this.state.order.comment || "",
           });
+          if (this.state.order.takenBy)
+            this.setState({
+              builderPhoto: this.state.order.takenBy.photo,
+            });
         })
         .catch((error) => this.setState({ error, isLoading: false }));
     });
   };
+
   getButtonText = () => {
     let buttonText;
     if (this.state.order.status === NEW_ORDER) {
@@ -167,16 +175,24 @@ class OrderDetail extends React.Component {
     this.setState({ expanded: !this.state.expanded });
   };
 
-  handleGoBack = () => {
-    this.props.history.go(-1);
+  showComment = () => {
+    this.setState({ showComment: true });
   };
 
-  showCommentModal = () => {
-    this.setState({ showCommentModal: true });
+  closeComment = () => {
+    this.setState({ showComment: false });
   };
 
-  closeCommentModal = () => {
-    this.setState({ showCommentModal: false });
+  showWriteComment = () => {
+    this.setState({ writeComment: true });
+  };
+
+  closeWriteComment = () => {
+    this.setState({ writeComment: false });
+  };
+
+  changeCommentStatus = (comment, star) => {
+    this.setState({ returnComment: true, comment, star });
   };
 
   renderContent = () => {
@@ -203,20 +219,18 @@ class OrderDetail extends React.Component {
               <div className="order-detail__head">
                 <ul className="order-detail__status">
                   <li className="order-detail__status-active">
-                    {getStatusText(this.state.order.status)}
+                    {getStatusText(this.state.order.status).toUpperCase()}{" "}
+                    BUILDING ORDER
                   </li>
                 </ul>
               </div>
-              <Typography variant="h2" component="h2">
-                House Building
-              </Typography>
               <OrderDetailList
                 clientName={this.state.clientName}
                 address={this.state.order.address}
                 dueDate={this.state.order.dueDate}
                 postDate={this.state.order.postDate}
-                //clientPhoto={this.state.clientPhoto}
-                //builderPhoto={this.state.builderPhoto}
+                clientPhoto={this.state.clientPhoto}
+                builderPhoto={this.state.builderPhoto}
                 builder={this.state.builder}
               />
             </Grid>
@@ -250,21 +264,22 @@ class OrderDetail extends React.Component {
                   </Button>
                   {this.state.order.status === COMPLETED &&
                     !this.state.order.comment &&
-                    !this.state.commentSubmit && (
+                    !this.state.returnComment && (
                       <Button
                         color={"primary"}
                         variant="contained"
-                        onClick={this.showWriteCommentModal}
+                        onClick={this.showWriteComment}
                       >
-                        LEAVE A COMMNET
+                        WRITE A COMMNET
                       </Button>
                     )}
+
                   {this.state.order.comment &&
                     this.state.order.status === COMPLETED && (
                       <Button
                         color={"primary"}
                         variant="contained"
-                        onClick={this.showCommentModal}
+                        onClick={this.showComment}
                       >
                         VIEW YOUR COMMENT
                       </Button>
@@ -296,16 +311,19 @@ class OrderDetail extends React.Component {
               </Box>
             </Grid>
           </Grid>
-          {/* <ShowOrderComment
-						clientPhoto={this.state.client.photo}
-						clientName={this.state.clientName}
-						star={this.state.star}
-						comment={this.state.comment}
-						showCommentModal={this.state.showCommentModal}
-						closeCommentModal={this.closeCommentModal}
-						orderId={this.state.order._id}
-						builder={this.state.builder}
-					/> */}
+          <WriteOrderComment
+            open={this.state.writeComment}
+            handleClose={this.closeWriteComment}
+            handleComment={this.changeCommentStatus}
+          />
+          <ShowOrderComment
+            clientPhoto={this.state.client.photo}
+            clientName={this.state.clientName}
+            star={this.state.star}
+            comment={this.state.comment}
+            open={this.state.showComment}
+            closeComment={this.closeComment}
+          />
           <div className="order-detail__details">
             <Typography variant="h6" component="p">
               DETAILS
@@ -396,12 +414,7 @@ class OrderDetail extends React.Component {
   };
 
   render() {
-    return (
-      <div className="order-detail">
-        <header className="order-detail__header">ORDER INFORMATION</header>
-        {this.renderContent()}
-      </div>
-    );
+    return <div className="order-detail">{this.renderContent()}</div>;
   }
 }
 

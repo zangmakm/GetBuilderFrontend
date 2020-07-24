@@ -19,6 +19,7 @@ const useStyles = (theme) => ({
 class Account extends React.Component {
   state = {
     builderName: "",
+    builderPhoto: "",
     ABNNumber: "",
     email: "",
     telephoneNumber: "",
@@ -35,21 +36,23 @@ class Account extends React.Component {
   defaultProfile = () => {
     const builderId = this.props.match.params.builderId;
 
-    this.setState({ isLoading: true });
-    getBuilder(builderId)
-      .then((data) => {
-        this.setState({
-          builderName: data.builderName,
-          ABNNumber: data.abn,
-          email: data.email,
-          telephoneNumber: data.mobile,
-          address: data.address,
-          postcode: data.postcode,
-          description: data.description,
-          isLoading: false,
-        });
-      })
-      .catch((error) => this.setState({ error, isLoading: false }));
+    this.setState({ isLoading: true }, () => {
+      getBuilder(builderId)
+        .then((data) => {
+          this.setState({
+            builderName: data.builderName,
+            builderPhoto: data.photo,
+            ABNNumber: data.abn,
+            email: data.email,
+            telephoneNumber: data.mobile,
+            address: data.address,
+            postcode: data.postcode,
+            description: data.description,
+            isLoading: false,
+          });
+        })
+        .catch((error) => this.setState({ error, isLoading: false }));
+    });
   };
 
   render() {
@@ -57,7 +60,7 @@ class Account extends React.Component {
     if (this.state.isLoading) {
       return (
         <div className={classes.loading}>
-          <CircularProgress size={100} color="secondary" />
+          <CircularProgress size={150} color="secondary" />
         </div>
       );
     } else {
@@ -65,7 +68,10 @@ class Account extends React.Component {
         <div className={classes.root}>
           <Grid container spacing={4}>
             <Grid item lg={4} md={6} xl={4} xs={12}>
-              <AccountProfile buildername={this.state.builderName} />
+              <AccountProfile
+                buildername={this.state.builderName}
+                builderphoto={this.state.builderPhoto}
+              />
             </Grid>
             <Grid item lg={8} md={6} xl={8} xs={12}>
               <AccountDetails state={this.state} />

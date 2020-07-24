@@ -33,3 +33,13 @@ export const updateClientOrderStatus = (orderId, clientId, status) => {
   const url = `${API_ORDERS_URL}/${orderId}/client/${clientId}?status=${status}`;
   return patch(url, status).then((res) => res.data.data);
 };
+
+export const updateOrder = (orderId, order) => {
+  const url = `${API_ORDERS_URL}/${orderId}`;
+  return put(url, order).then((res) => res.data.data);
+};
+
+export const addOrderComment = (orderId, comments) => {
+  const url = `${API_ORDERS_URL}/${orderId}/comment`;
+  return post(url, comments).then((res) => res.data.data);
+};

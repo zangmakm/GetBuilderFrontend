@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Divider, Drawer } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import AssignmentIcon from "@material-ui/icons/Assignment";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 
 import { Profile, SidebarNav } from "./components";
-import { CLIENT_BASE_URL } from "../../../../../routes/URLMap";
+import { SERVICE_URL, CLIENT_BASE_URL } from "../../../../../routes/URLMap";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -45,6 +45,11 @@ const Sidebar = (props) => {
       title: "Dashboard",
       href: `${CLIENT_BASE_URL}/${clientId}/dashboard`,
       icon: <DashboardIcon />,
+    },
+    {
+      title: "Post A Task",
+      href: `${SERVICE_URL}`,
+      icon: <AssignmentIcon />,
     },
     {
       title: "Order Management",

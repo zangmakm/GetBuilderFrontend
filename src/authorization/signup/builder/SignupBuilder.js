@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { LinearProgress } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -299,10 +300,14 @@ class SignupBuilder extends React.Component {
                   />
                 </Grid>
               </Grid>
-              {!this.state.isLoading && !!this.state.error && (
+              {this.state.error && (
                 <Alert severity="error">{this.state.error}</Alert>
               )}
+              {this.state.isLoading && (
+                <LinearProgress className={classes.root} />
+              )}
               <Button
+                disabled={this.state.isLoading}
                 type="submit"
                 fullWidth
                 variant="contained"

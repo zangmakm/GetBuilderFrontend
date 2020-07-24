@@ -5,6 +5,7 @@ import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { LinearProgress } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Checkbox from "@material-ui/core/Checkbox";
 import Linkr from "@material-ui/core/Link";
@@ -330,11 +331,15 @@ class SignupClient extends React.Component {
                     label="I want to receive inspiration, marketing promotions and updates via email."
                   />
                 </Grid>
-                {!this.state.isLoading && !!this.state.error && (
+                {this.state.error && (
                   <Alert severity="error">{this.state.error}</Alert>
                 )}
               </Grid>
+              {this.state.isLoading && (
+                <LinearProgress className={classes.root} />
+              )}
               <Button
+                disabled={this.state.isLoading}
                 type="submit"
                 fullWidth
                 variant="contained"
