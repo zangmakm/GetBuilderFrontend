@@ -21,7 +21,6 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import { convertCurrency, getStatusText } from "../utils/helper";
 import { NEW_ORDER, ASSIGNED, COMPLETED } from "../utils/variables";
 import palette from "../builder/theme/palette";
-//import img from "../../logo.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,13 +82,11 @@ const OrderCard = (props) => {
         <CardContent>
           <Grid container spacing={2}>
             <Grid item xs={7}>
-              <Avatar className={classes.avatar}></Avatar>
-              {/* <img
-              alt="Client"
-              className={classes.image}
-              src={img}
-              src={order.status}
-            /> */}
+              <Avatar
+                className={classes.avatar}
+                src={order.postBy.photo}
+                alt="Client"
+              ></Avatar>
             </Grid>
             <Grid item xs={5}>
               <Typography align="center" variant="h2">

@@ -4,21 +4,19 @@ import { withRouter } from "react-router";
 import PropTypes from "prop-types";
 import moment from "moment";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { makeStyles, withTheme } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import {
   Card,
-  CardActions,
   CardContent,
   Avatar,
-  Checkbox,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
-  TablePagination,
 } from "@material-ui/core";
+import { StatusBullet } from "../../../../components";
 import { BUILDER_BASE_URL } from "../../../../../routes/URLMap";
 import { getInitials } from "../../../../../utils/helper";
 import { convertCurrency } from "../../../../../utils/helper";
@@ -45,11 +43,17 @@ const useStyles = makeStyles((theme) => ({
   actions: {
     justifyContent: "flex-end",
   },
+  statusContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  status: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const TasksTable = (props) => {
   const { className, orders, ...rest } = props;
-
   const classes = useStyles();
 
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -68,17 +72,6 @@ const TasksTable = (props) => {
             <Table>
               <TableHead>
                 <TableRow>
-                  {/* <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedUsers.length === orders.length}
-                      color="primary"
-                      indeterminate={
-                        selectedUsers.length > 0 &&
-                        selectedUsers.length < orders.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell> */}
                   <TableCell className={classes.header}>PostBy</TableCell>
                   <TableCell className={classes.header}>Price</TableCell>
                   <TableCell className={classes.header}>Location</TableCell>
@@ -95,19 +88,11 @@ const TasksTable = (props) => {
                     selected={selectedUsers.indexOf(order._id) !== -1}
                     onClick={(event) => handleClick(event, order._id)}
                   >
-                    {/* <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={selectedUsers.indexOf(order._id) !== -1}
-                        color="primary"
-                        onChange={(event) => handleSelectOne(event, order._id)}
-                        value="true"
-                      />
-                    </TableCell> */}
                     <TableCell>
                       <div className={classes.nameContainer}>
                         <Avatar
                           className={classes.avatar}
-                          src={order.postBy.avatarUrl}
+                          src={order.postBy.photo}
                         >
                           {getInitials(order.postBy.fullName)}
                         </Avatar>
@@ -121,7 +106,16 @@ const TasksTable = (props) => {
                     <TableCell>
                       {moment(order.dueDate).format("DD/MM/YYYY hh:mm A")}
                     </TableCell>
-                    <TableCell>{order.status}</TableCell>
+                    <TableCell>
+                      <div className={classes.statusContainer}>
+                        <StatusBullet
+                          className={classes.status}
+                          color="success"
+                          size="sm"
+                        />
+                        {order.status}
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

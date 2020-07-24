@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import Detail from "../../../../../service/components/Detail";
+import OrderEditDetail from "./OrderEditDetail";
 import Calculator from "../../../../../service/components/Calculator";
 import styled from "styled-components";
-import { createOrder } from "../../../../../api/order";
-import { isLoggedIn, getClientId } from "../../../../../utils/auth";
-import { convertCurrency } from "../../../../../utils/helper";
-import { SIGNIN_URL, CLIENT_BASE_URL } from "../../../../../routes/URLMap";
+import { getOrder, updateOrder } from "../../../../../api/order";
+import { CLIENT_BASE_URL } from "../../../../../routes/URLMap";
+import { CircularProgress, Grid } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
-const Content = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
-  font-family: "Nunito", sans-serif;
-  display: flex;
-  flex-wrap: wrap;
+const ProgressContainer = styled.div`
+  padding: 20%;
+  text-align: center;
 `;
 
 class OrderEdit extends Component {
@@ -24,7 +22,32 @@ class OrderEdit extends Component {
     dueDate: "",
     price: "0",
     error: null,
-    isCreating: false,
+    isLoading: false,
+    isUpdating: false,
+  };
+
+  componentDidMount() {
+    const orderId = this.props.match.params.orderId;
+    this.loadOrder(orderId);
+  }
+
+  loadOrder = (orderId) => {
+    this.setState({ isLoading: true }, () => {
+      getOrder(orderId)
+        .then((order) => {
+          this.setState({
+            storeys: order.storeys,
+            bedrooms: order.bedrooms,
+            bathrooms: order.bathrooms,
+            garages: order.garages,
+            address: order.address,
+            dueDate: order.dueDate,
+            price: order.price,
+            isLoading: false,
+          });
+        })
+        .catch((error) => this.setState({ error, isLoading: false }));
+    });
   };
 
   calculatePrice = () => {
@@ -35,57 +58,72 @@ class OrderEdit extends Component {
       this.state.garages * 50000;
 
     this.setState({
-      price: convertCurrency(totalPrice),
+      price: totalPrice,
     });
   };
 
   handleChange = (event) => {
     const key = event.target.name;
     const value = event.target.value;
-    this.setState({ [key]: value });
+    this.setState({ [key]: value }, () => this.calculatePrice());
   };
 
-  handleOption = (key, option) => {
-    this.setState({ [key]: option }, () => this.calculatePrice());
-  };
-
-  clearOption = (key, option) => {
-    this.setState({ [key]: "" }, () => this.calculatePrice());
-  };
-
-  handleCreate = () => {
-    if (!isLoggedIn()) {
-      this.props.history.push(SIGNIN_URL);
-    }
-
+  handleUpdate = () => {
     const order = { ...this.state };
 
-    this.setState({ isCreating: true }, () => {
-      const clientId = getClientId();
-      createOrder(clientId, order)
-        .then((newOrder) => {
+    this.setState({ isUpdating: true }, () => {
+      const orderId = this.props.match.params.orderId;
+      const clientId = this.props.match.params.clientId;
+      updateOrder(orderId, order)
+        .then(() => {
           this.props.history.push(
-            `${CLIENT_BASE_URL}/${clientId}/orders/${newOrder._id}`
+            `${CLIENT_BASE_URL}/${clientId}/orders/${orderId}`
           );
         })
-        .catch((error) => this.setState({ error }));
+        .catch((error) => this.setState({ error, isUpdating: false }));
     });
   };
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <ProgressContainer>
+          <CircularProgress size={150} color="secondary" />
+        </ProgressContainer>
+      );
+    }
+    if (this.state.isUpdating) {
+      return (
+        <ProgressContainer>
+          <CircularProgress size={150} color="secondary" />
+        </ProgressContainer>
+      );
+    }
+    if (!!this.state.error) {
+      return <Alert severity="error">{this.state.error.toString()}</Alert>;
+    }
     return (
       <React.Fragment>
-        <Content>
-          <Detail
-            handleChange={this.handleChange}
-            handleOption={this.handleOption}
-            clearOption={this.clearOption}
-          />
-          <Calculator
-            price={this.state.price}
-            handleSubmit={this.handleCreate}
-          />
-        </Content>
+        <Grid container spacing={2}>
+          <Grid item md={7} xs={12}>
+            <OrderEditDetail
+              handleChange={this.handleChange}
+              storeys={this.state.storeys}
+              bedrooms={this.state.bedrooms}
+              bathrooms={this.state.bathrooms}
+              garages={this.state.garages}
+              address={this.state.address}
+              dueDate={this.state.dueDate}
+            />
+          </Grid>
+          <Grid item md={5} xs={12}>
+            <Calculator
+              price={this.state.price}
+              buttontext="Update My Order"
+              handleSubmit={this.handleUpdate}
+            />
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }

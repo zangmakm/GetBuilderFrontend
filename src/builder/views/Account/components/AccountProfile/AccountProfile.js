@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { withStyles } from "@material-ui/core";
-import { avatar3 } from "../../../../../assets/images/avatar3.png";
 import {
   Card,
   CardActions,
@@ -39,7 +38,6 @@ class AccountProfile extends React.Component {
     city: "Brisbane",
     country: "Australia",
     timezone: "GMT+10",
-    avatar: "../../../../../assets/images/avatar3.png",
   };
 
   render() {
@@ -69,8 +67,8 @@ class AccountProfile extends React.Component {
             </div>
             <Avatar
               className={classes.avatar}
-              src="./avatar3.png"
-              alt={avatar3}
+              src={this.props.builderphoto}
+              alt="Builder"
             />
           </div>
           <div className={classes.progress}>

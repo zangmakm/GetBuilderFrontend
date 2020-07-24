@@ -42,7 +42,17 @@ class BuildersOrder extends React.Component {
   };
 
   componentDidMount() {
-    this.loadOrders();
+    const { status } = this.props.location;
+    const {
+      pagination: { page, pageSize },
+    } = this.state;
+
+    if (status) {
+      this.loadOrders(page, pageSize, status.search);
+      this.setState({ search: status.search });
+    } else {
+      this.loadOrders();
+    }
   }
 
   loadOrders = (page, pageSize, search) => {
@@ -95,7 +105,7 @@ class BuildersOrder extends React.Component {
         />
         {this.state.isLoading && (
           <div className={classes.progress__container}>
-            <CircularProgress size={100} color="secondary" />
+            <CircularProgress size={150} color="secondary" />
           </div>
         )}
         {this.state.error && (

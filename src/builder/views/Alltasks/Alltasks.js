@@ -131,8 +131,10 @@ class Alltasks extends React.Component {
         </div>
         {this.state.isLoading ? (
           <div className={classes.progress__container}>
-            <CircularProgress size={100} color="secondary" />
+            <CircularProgress size={150} color="secondary" />
           </div>
+        ) : !this.state.isLoading && !this.state.orders.length ? (
+          <p> There isn't any available order. </p>
         ) : (
           <div>
             <div className={classes.pagination}>
@@ -148,9 +150,6 @@ class Alltasks extends React.Component {
             </div>
             {this.state.error && (
               <Alert severity="error">{this.state.error}</Alert>
-            )}
-            {!this.state.isLoading && !this.state.orders.length && (
-              <p> There isn't any order. </p>
             )}
           </div>
         )}
