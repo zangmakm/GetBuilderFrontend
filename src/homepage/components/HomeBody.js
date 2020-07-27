@@ -69,7 +69,7 @@ class HomeBody extends React.Component {
               pulvinar, felis enim finibus dui, non ultrices felis leo a ex.
             </p>
           </div>
-          <div style={{ marginTop: "10%" }}>
+          <div style={{ marginTop: "10%", margin: "50px auto", width: "80%" }}>
             <h3 style={{ textAlign: "center" }}>Why Choose Us</h3>
             <FlexContainer>
               <MyCard

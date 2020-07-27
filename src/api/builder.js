@@ -7,7 +7,12 @@ const API_BUILDER_URL = "/builders";
 export const fetchBuilders = () => {
   const url = `${API_BUILDER_URL}`;
   return get(url).then((res) => ({
-    builders: res.data.data.map((builder) => ({ ...builder, image: mockImg })),
+    builders: res.data.data.map((builder) => ({
+      ...builder,
+      image: mockImg,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce blandit eget sem nec dictum. Proin elementum pulvinar tortor ut vehicula. Cras iaculis arcu sit amet turpis scelerisque, a commodo ipsum luctus. Pellentesque nisl ex, pretium tempus posuere rhoncus, consequat eu ex. Integer sollicitudin lacus ante, commodo mollis ligula suscipit dignissim. Donec pharetra scelerisque mauris ac tempus. Donec faucibus velit vitae nisl sodales tristique. Sed quis arcu egestas, semper purus ut, scelerisque urna.",
+    })),
   }));
 };
 
