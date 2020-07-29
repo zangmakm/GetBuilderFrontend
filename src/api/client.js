@@ -31,3 +31,8 @@ export const getClientOrders = (clientId, page = 1, pageSize = 6, status) => {
     status: res.data.search,
   }));
 };
+
+export const updateAvatar = (clientId, file) => {
+  const url = `${API_CLIENTS_URL}/${clientId}/avatar`;
+  return put(url, file);
+};

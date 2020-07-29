@@ -13,7 +13,6 @@ import Box from "@material-ui/core/Box";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Rating from "@material-ui/lab/Rating";
 import { addOrderComment } from "../api/order";
-import { CLIENT_BASE_URL } from "../routes/URLMap";
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -80,7 +79,6 @@ class WriteOrderComment extends React.Component {
       comments: this.state.comment,
     };
     const orderId = this.props.match.params.orderId;
-    const clientId = this.props.match.params.clientId;
     this.setState(
       {
         isLoading: true,
@@ -88,10 +86,13 @@ class WriteOrderComment extends React.Component {
       () => {
         addOrderComment(orderId, orderComment)
           .then(() => {
-            this.setState({
-              submitSuccess: true,
-              isLoading: false,
-            });
+            this.setState(
+              {
+                submitSuccess: true,
+                isLoading: false,
+              },
+              () => window.location.reload()
+            );
             this.props.handleComment(this.state.comment, this.state.star);
           })
           .catch((error) => this.setState({ error, isLoading: false }));

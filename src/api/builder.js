@@ -44,3 +44,8 @@ export const getBuilderOrders = (builderId, page = 1, pageSize = 6, status) => {
     status: res.data.search,
   }));
 };
+
+export const updateAvatar = (builderId, file) => {
+  const url = `${API_BUILDER_URL}/${builderId}/avatar`;
+  return put(url, file);
+};
