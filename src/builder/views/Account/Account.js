@@ -57,6 +57,7 @@ class Account extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const builderId = this.props.match.params.builderId;
     if (this.state.isLoading) {
       return (
         <div className={classes.loading}>
@@ -71,6 +72,7 @@ class Account extends React.Component {
               <AccountProfile
                 buildername={this.state.builderName}
                 builderphoto={this.state.builderPhoto}
+                builderId={builderId}
               />
             </Grid>
             <Grid item lg={8} md={6} xl={8} xs={12}>

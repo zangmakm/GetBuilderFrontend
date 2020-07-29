@@ -16,6 +16,7 @@ import {
   Divider,
   Grid,
   Button,
+  LinearProgress,
 } from "@material-ui/core";
 
 const useStyles = (theme) => ({
@@ -212,20 +213,21 @@ class AccountDetails extends React.Component {
           </CardContent>
           <Divider />
           <CardActions>
-            {this.state.buttonDisabled ? (
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                disabled
-              >
-                Update Profile
-              </Button>
-            ) : (
-              <Button type="submit" color="primary" variant="contained">
-                Update Profile
-              </Button>
-            )}
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                {this.state.buttonDisabled && <LinearProgress />}
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  disabled={this.state.buttonDisabled}
+                >
+                  Update Profile
+                </Button>
+              </Grid>
+            </Grid>
           </CardActions>
         </ValidatorForm>
       </Card>
