@@ -1,5 +1,5 @@
 import React from "react";
-import homeHeader from "../home_header.mp4";
+import homeHeader from "../../assets/video/home_header.mp4";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 

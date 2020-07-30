@@ -35,7 +35,7 @@ export const getStatusText = (status) => {
   let statusText;
   switch (status) {
     case NEW_ORDER:
-      statusText = "New Order";
+      statusText = "New";
       break;
     case CANCEL_CLIENT:
       statusText = "Cancelled by Client";

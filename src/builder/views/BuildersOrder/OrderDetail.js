@@ -96,6 +96,21 @@ class OrderDetail extends React.Component {
         .catch((error) => this.setState({ error, isLoading: false }));
     });
   };
+
+  getClassName = (status) => {
+    let className;
+    if (status === NEW_ORDER) {
+      className = "order-detail__status-new";
+    } else if (status === ASSIGNED) {
+      className = "order-detail__status-assigned";
+    } else if (status === COMPLETED) {
+      className = "order-detail__status-completed";
+    } else {
+      className = "order-detail__status-cancel";
+    }
+    return className;
+  };
+
   getButtonText = () => {
     let buttonText;
     if (this.state.order.status === NEW_ORDER) {
@@ -193,9 +208,8 @@ class OrderDetail extends React.Component {
             <Grid item sm={8} xs={12}>
               <div className="order-detail__head">
                 <ul className="order-detail__status">
-                  <li className="order-detail__status-active">
-                    {getStatusText(this.state.order.status).toUpperCase()}{" "}
-                    BUILDING ORDER
+                  <li className={this.getClassName(this.state.order.status)}>
+                    {getStatusText(this.state.order.status).toUpperCase()} ORDER
                   </li>
                 </ul>
               </div>

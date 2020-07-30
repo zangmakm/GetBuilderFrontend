@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { createOrder } from "../api/order";
 import { isLoggedIn, getClientId } from "../utils/auth";
 import TopNav from "../navigation/TopNav";
-import { convertCurrency } from "../utils/helper";
 import { SIGNIN_URL, CLIENT_BASE_URL } from "../routes/URLMap";
 
 const Content = styled.div`
@@ -56,14 +55,14 @@ class ServiceView extends Component {
   };
 
   handleCreate = () => {
-    if (!isLoggedIn()) {
+    const clientId = getClientId();
+    if (!isLoggedIn() || !clientId) {
       this.props.history.push(SIGNIN_URL);
     }
 
     const order = { ...this.state };
 
     this.setState({ isCreating: true }, () => {
-      const clientId = getClientId();
       createOrder(clientId, order)
         .then((newOrder) => {
           this.props.history.push(

@@ -1,5 +1,4 @@
-import { del, get, put, post } from "./axios";
-import mockImg from "../homepage/assets/builder-profile.jpg";
+import { get, put, post } from "./axios";
 import queryString from "query-string";
 
 const API_BUILDER_URL = "/builders";
@@ -9,9 +8,8 @@ export const fetchBuilders = () => {
   return get(url).then((res) => ({
     builders: res.data.data.map((builder) => ({
       ...builder,
-      image: mockImg,
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce blandit eget sem nec dictum. Proin elementum pulvinar tortor ut vehicula. Cras iaculis arcu sit amet turpis scelerisque, a commodo ipsum luctus. Pellentesque nisl ex, pretium tempus posuere rhoncus, consequat eu ex. Integer sollicitudin lacus ante, commodo mollis ligula suscipit dignissim. Donec pharetra scelerisque mauris ac tempus. Donec faucibus velit vitae nisl sodales tristique. Sed quis arcu egestas, semper purus ut, scelerisque urna.",
+        "Lorem ipsum dolor sit amet. Proin elementum pulvinar tortor ut vehicula. Cras iaculis arcu sit amet turpis scelerisque, a commodo ipsum luctus. Pellentesque nisl ex, pretium tempus posuere rhoncus, consequat eu ex. Integer sollicitudin lacus ante, commodo mollis. Donec pharetra scelerisque mauris ac tempus. ",
     })),
   }));
 };

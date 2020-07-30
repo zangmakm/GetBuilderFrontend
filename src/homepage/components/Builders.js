@@ -8,7 +8,7 @@ const avatarStyle = {
   width: "80px",
   height: "80px",
   borderRadius: "50%",
-  margin: "0 auto",
+  margin: "8px auto",
 };
 
 class Builders extends React.Component {
@@ -24,8 +24,8 @@ class Builders extends React.Component {
         <FlexContainer>
           {this.props.builders.map((builder) => (
             <Card key={builder._id} style={{ width: "15rem", margin: "10px" }}>
-              <Card.Img variant="top" src={builder.image} style={avatarStyle} />
-              <Card.Body>
+              <Card.Img variant="top" src={builder.photo} style={avatarStyle} />
+              <Card.Body style={{ textAlign: "center" }}>
                 <Card.Title>{builder.builderName}</Card.Title>
                 <Card.Text>{builder.email}</Card.Text>
                 <Button
