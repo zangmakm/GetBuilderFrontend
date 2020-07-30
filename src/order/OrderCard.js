@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: (props) => getCardColor(props.status),
     color: "white",
     borderRadius: "5px",
+    padding: "0 6px",
   },
   orderCardList: {
     listStyle: "none",

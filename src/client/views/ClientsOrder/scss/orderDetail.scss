@@ -115,9 +115,24 @@ $disabled-text-color: #c2c2c2;
   background-color: $disabled-text-color;
 }
 
-.order-detail__status .order-detail__status-active {
+.order-detail__status .order-detail__status-new {
   color: white;
-  background-color: $primary-blue;
+  background-color: #5e9ceb;
+}
+
+.order-detail__status .order-detail__status-assigned {
+  color: white;
+  background-color: #fb8c00;
+}
+
+.order-detail__status .order-detail__status-completed {
+  color: white;
+  background-color: #43a047;
+}
+
+.order-detail__status .order-detail__status-cancel {
+  color: white;
+  background-color: #c2c2c2;
 }
 
 .order-detail__details--list {

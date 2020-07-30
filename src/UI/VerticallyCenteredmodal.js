@@ -10,7 +10,7 @@ const VerticallyCenteredmodal = (props) => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        style={{ zIndex: "10000" }}
+        style={{ zIndex: "10000", textAlign: "center" }}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -25,7 +25,7 @@ const VerticallyCenteredmodal = (props) => {
           }}
         >
           <container>
-            <img src={props.builder.image} style={{ maxWidth: "200px" }} />
+            <img src={props.builder.photo} style={{ maxWidth: "200px" }} />
             <p>
               ABN <span style={{ color: "blue" }}>{props.builder.abn}</span>
             </p>

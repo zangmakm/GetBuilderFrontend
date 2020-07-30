@@ -1,5 +1,5 @@
 import React from "react";
-import builder from "../builder.jpg";
+import builder from "../../assets/images/builder.jpg";
 import "../style/header.scss";
 
 function Header() {
