@@ -83,7 +83,8 @@ function ContactForm(props) {
                 Receive offers
               </Typography>
               <Typography variant="h5">
-                Taste the holidays of the everyday close to home.
+                Fill out the form below and we will get back to you as soon as
+                possible.
               </Typography>
               <TextField
                 noborder="true"
