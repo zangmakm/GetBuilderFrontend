@@ -50,7 +50,7 @@ const TopNav = () => {
             </Typography>
           </Toolbar>
           <Typography variant="h5" className={classes.navItem}>
-            <NavLink to="/service" activeStyle={activeStyle}>
+            <NavLink to="/task" activeStyle={activeStyle}>
               POST TASK
             </NavLink>
           </Typography>

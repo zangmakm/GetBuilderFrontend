@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import HomeView from "../homepage/HomeView";
 import SupportView from "../support/SupportView";
 import ServiceView from "../service/ServiceView";
+import ServiceInfo from "../service/ServiceInfo";
 import SignIn from "../authorization/signin/SignIn";
 import SignupBuilder from "../authorization/signup/builder/SignupBuilder";
 import SignupClient from "../authorization/signup/client/SignupClient";
@@ -16,8 +17,9 @@ import {
   SIGNIN_URL,
   SIGNUP_URL,
   HOMEPAGE_URL,
-  SERVICE_URL,
+  TASK_URL,
   SUPPORT_URL,
+  SERVICE_URL,
 } from "./URLMap";
 
 const Routes = () => {
@@ -25,7 +27,8 @@ const Routes = () => {
     <Switch>
       <Redirect exact from="/" to={HOMEPAGE_URL} />
       <Route exact path={HOMEPAGE_URL} component={HomeView} />
-      <Route exact path={SERVICE_URL} component={ServiceView} />
+      <Route exact path={TASK_URL} component={ServiceView} />
+      <Route exact path={`${SERVICE_URL}/:id`} component={ServiceInfo} />
       <Route exact path={SUPPORT_URL} component={SupportView} />
       <Route exact path={SIGNIN_URL} component={SignIn} />
       <Route
