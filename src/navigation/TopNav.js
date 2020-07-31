@@ -51,7 +51,7 @@ const TopNav = () => {
           </Toolbar>
           <Typography variant="h5" className={classes.navItem}>
             <NavLink to="/service" activeStyle={activeStyle}>
-              HOUSE PACKAGES
+              POST TASK
             </NavLink>
           </Typography>
           <Typography variant="h5" className={classes.navItem}>

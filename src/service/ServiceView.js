@@ -86,7 +86,7 @@ class ServiceView extends Component {
           />
           <Calculator
             price={this.state.price}
-            buttontext="Find a Builder"
+            buttontext="Post a Task"
             handleSubmit={this.handleCreate}
           />
         </Content>
