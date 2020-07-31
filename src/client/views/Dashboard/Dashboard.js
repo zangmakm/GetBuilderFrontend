@@ -16,6 +16,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
+    backgroundColor: "#f4f6f8",
   },
 }));
 

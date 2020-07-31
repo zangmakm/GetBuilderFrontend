@@ -4,7 +4,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { AppBar, Toolbar } from "@material-ui/core";
-import logo from "../../../../../assets/images/logo.png";
+import logo from "../../../../../assets/images/reversalLogo.png";
 
 const useStyles = makeStyles(() => ({
   root: {

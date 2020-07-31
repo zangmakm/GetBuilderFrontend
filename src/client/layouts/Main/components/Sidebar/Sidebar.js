@@ -11,7 +11,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { Profile, SidebarNav } from "./components";
-import { SERVICE_URL, CLIENT_BASE_URL } from "../../../../../routes/URLMap";
+import { TASK_URL, CLIENT_BASE_URL } from "../../../../../routes/URLMap";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -48,7 +48,7 @@ const Sidebar = (props) => {
     },
     {
       title: "Post A Task",
-      href: `${SERVICE_URL}`,
+      href: `${TASK_URL}`,
       icon: <AssignmentIcon />,
     },
     {
