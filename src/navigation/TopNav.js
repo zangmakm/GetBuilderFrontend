@@ -3,7 +3,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { isLoggedIn } from "../utils/auth";
 import { getBuilderId, getClientId } from "../utils/auth";
-import logoImg from "./logo.png";
+import logoImg from "../assets/images/logo.png";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -60,6 +60,15 @@ const TopNav = () => {
             </NavLink>
           </Typography>
           <Typography variant="h5" align="right" className={classes.navItem}>
+            <StyledSignin
+              to="/signin"
+              isloggedin={isLoggedIn() ? 1 : 0}
+              activeStyle={activeStyle}
+            >
+              SIGNIN
+            </StyledSignin>
+          </Typography>
+          <Typography variant="h5" align="right" className={classes.navItem}>
             <StyledDashboard
               isloggedin={isLoggedIn() ? 1 : 0}
               loginclient={loginClient}
@@ -73,15 +82,6 @@ const TopNav = () => {
             >
               DASHBOARD
             </StyledDashboard>
-          </Typography>
-          <Typography variant="h5" align="right" className={classes.navItem}>
-            <StyledSignin
-              to="/signin"
-              isloggedin={isLoggedIn() ? 1 : 0}
-              activeStyle={activeStyle}
-            >
-              SIGNIN
-            </StyledSignin>
           </Typography>
         </Toolbar>
       </AppBar>

@@ -5,11 +5,7 @@ $disabled-text-color: #c2c2c2;
   padding: 20px;
   margin-bottom: 40px;
   border-top: solid 3px #eee;
-  &__header {
-    padding-top: 10px;
-    color: $primary-blue;
-    font-weight: 550;
-  }
+  background-color: #f4f6f8;
   &__top {
     font-size: 0.9rem;
     color: $disabled-text-color;

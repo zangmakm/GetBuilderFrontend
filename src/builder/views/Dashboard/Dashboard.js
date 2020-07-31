@@ -12,12 +12,13 @@ import {
   TotalProfit,
   LatestSales,
   UsersByDevice,
-  LatestProducts,
+  LatestComments,
 } from "./components";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
+    backgroundColor: "#f4f6f8",
   },
 }));
 
@@ -76,7 +77,7 @@ const Dashboard = (props) => {
           <UsersByDevice />
         </Grid>
         <Grid item xs={12}>
-          <LatestProducts />
+          <LatestComments />
         </Grid>
       </Grid>
     </div>

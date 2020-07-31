@@ -29,7 +29,7 @@ import { login as loginFn } from "../../api/auth";
 const useStyles = (theme) => ({
   container: {
     paddingTop: "10vh",
-    height: "100vh",
+    height: "90vh",
   },
   paper: {
     marginTop: theme.spacing(2),
