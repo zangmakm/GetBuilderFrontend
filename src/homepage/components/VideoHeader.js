@@ -31,7 +31,7 @@ class VideoHeader extends React.Component {
           <h1>Builders Buddy</h1>
           <h3>We build all through QUEENSLAND</h3>
           <FindMoreBtn>
-            <Link to="/service">Post a task</Link>
+            <Link to="/task">Post a task</Link>
           </FindMoreBtn>
         </div>
       </section>
